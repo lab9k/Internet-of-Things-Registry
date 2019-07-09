@@ -293,6 +293,7 @@
     "circular-dependency-plugin": "3.0.0",
     "coveralls": "2.13.1",
     "css-loader": "0.28.4",
+    "dotenv": "^8.0.0",
     "dyson": "^2.0.1",
     "dyson-generators": "^0.2.0",
     "dyson-image": "^0.2.0",
@@ -339,7 +340,6 @@
     "url-loader": "0.5.8",
     "webpack": "3.5.5",
     "webpack-dev-middleware": "1.11.0",
-    "webpack-hot-middleware": "^2.22.3",
-    "dotenv": "^8.0.0"
+    "webpack-hot-middleware": "^2.22.3"
   }
 }
