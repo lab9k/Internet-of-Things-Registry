@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 
 const envVars = dotenv.config().parsed || {};
 
+// return variables from .env file
 module.exports = () => {
   const citySpecificEnvs = Object.entries(envVars).reduce((p, [key, value]) => {
     // eslint-disable-next-line no-param-reassign
