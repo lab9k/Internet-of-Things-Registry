@@ -6,6 +6,7 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 
 import MapInteractive from '../../components/MapInteractive';
+import LeafletMap from '../../components/LeafletMap';
 import ContactForm from '../../pages/ContactForm';
 import Categories from '../../pages/DeviceCategories';
 import About from '../../pages/About';
@@ -25,7 +26,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
           <div className="row">
             <div className="col-12 col-sm-10 offset-sm-1 col-md-8">
               <Switch>
-                <Route exact path="/" component={MapInteractive} />
+                <Route exact path="/" component={LeafletMap} />
                 <Route path="/contact-owner/:deviceId/" component={ContactForm} />
                 <Route path="/categories" component={Categories} />
                 <Route path="/about/faq" component={FAQ} />
