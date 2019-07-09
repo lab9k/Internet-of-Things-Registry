@@ -1,6 +1,6 @@
 
-# Register Slimme Apparaten
-This application shows all registered smart devices on a map of Amsterdam. If zoomed out, they are clustered together. To see the individual smart devices, zoom in or click on a cluster. The smart devices are divided in several categories and types, depending on the kind of data that they collect. Users can also fill out a form to contact the owner of a smart device to ask questions about the data.
+# Internet of Things Registry
+This application shows all registered smart devices on a map. If zoomed out, they are clustered together. To see the individual smart devices, zoom in or click on a cluster. The smart devices are divided in several categories and types, depending on the kind of data that they collect. Users can also fill out a form to contact the owner of a smart device to ask questions about the data.
 
 ## Requirements
 - npm
