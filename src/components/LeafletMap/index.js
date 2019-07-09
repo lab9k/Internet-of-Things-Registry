@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// TODO: import PropTypes from 'prop-types'; unused
 import { Route } from 'react-router-dom';
-import { isEqual } from 'lodash';
+// TODO: import { isEqual } from 'lodash'; is unused atm
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import L from 'leaflet';
 
 import { getDevices, getDevice, getCameraAreas } from '../../services/api/iot';
 import { showAreas, showMarkers, toggleElement } from '../../services/iotmap';
@@ -17,7 +18,7 @@ import './style.scss';
 
 const visibleCategories = { ...categories };
 
-const mapCenter = [52.378851,4.8979017];
+const mapCenter = [52.378851, 4.8979017];
 
 Object.keys(visibleCategories)
   .filter((cat) => !(visibleCategories[cat].visible && visibleCategories[cat].enabled))
@@ -25,7 +26,7 @@ Object.keys(visibleCategories)
     delete visibleCategories[cat];
   });
 
-const DEFAULT_ZOOM_LEVEL = 14;
+// TODO: const DEFAULT_ZOOM_LEVEL = 14; unused atm
 
 const SELECTION_STATE = {
   NOTHING: 0,
@@ -117,6 +118,22 @@ class LMap extends React.Component {
       )}
     />);
 
+    const pointIcon = new L.Icon({
+      iconUrl: 'assets/icon-camera@3x.png',
+      name: 'Camera',
+      enabled: true,
+      description: 'Een camera neemt beelden waar en houdt die niet persé vast. Bijvoorbeeld: een fotocamera legt beelden vast; een camera om aantallen vervoersmiddelen te tellen, neemt waar, telt en legt de beelden niet persé vast. De technologie gaat zo snel vooruit dat er inmiddels camera’s zijn voor gezichtsherkenning die in staat zijn op basis van een combinatie van getallen te zoeken naar specifieke gezichten, bijvoorbeeld van een crimineel, zonder andere gezichten te herkennen en vast te leggen.',
+      wikipediaUrl: 'https://en.wikipedia.org/wiki/Camera',
+      wikipediaDescription: 'A camera is an optical instrument for recording or capturing images, which may be stored locally, transmitted to another location, or both. The images may be individual still photographs or sequences of images constituting videos or movies. The camera is a remote sensing device as it senses subjects without any contact . The word camera comes from camera obscura, which means "dark chamber" and is the Latin name of the original device for projecting an image of external reality onto a flat surface. The modern photographic camera evolved from the camera obscura. The functioning of the camera is very similar to the functioning of the human eye. The first permanent photograph was made in 1826 by Joseph Nicéphore Niépce.',
+      subtypes: [
+        'Telcamera',
+        'Kentekenherkenning',
+        'Beeld'
+      ],
+      visible: true,
+      isClustered: true,
+    });
+
     return (
       <div className="map-component">
         <div className="map">
@@ -130,7 +147,7 @@ class LMap extends React.Component {
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker position={mapCenter}>
+              <Marker position={mapCenter} icon={pointIcon}>
                 <Popup>
                   Bla, bla, bla
                 </Popup>
@@ -159,8 +176,8 @@ LMap.defaultProps = {
 };
 
 LMap.propTypes = {
-  location: PropTypes.object,
-  onQueryResult: PropTypes.func
+  // TODO: location: PropTypes.object,
+  // TODO: onQueryResult: PropTypes.func
 };
 
 export default LMap;
