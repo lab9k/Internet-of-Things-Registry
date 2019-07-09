@@ -15,8 +15,8 @@ const appLocales = LANGUAGES.split(',').map((lang) => lang.trim());
 appLocales.forEach((lang) => {
   try {
     /* eslint-disable global-require */
-    const langData = require(`react-intl/locale-data/${lang}`);
-    const messages = require(`./translations/${lang}.json`);
+    const langData = import(/* webpackChunkName: "react-intl-locale-data", webpackMode: "eager" */`react-intl/locale-data/${lang}`);
+    const messages = require(/* webpackChunkName: "translation", webpackMode: "lazy-once" */`./translations/${lang}.json`);
     /* eslint-enable */
 
     addLocaleData(langData);
