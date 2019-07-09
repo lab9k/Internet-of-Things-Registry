@@ -18,7 +18,7 @@ import './style.scss';
 
 const visibleCategories = { ...categories };
 
-const mapCenter = [56.1535,10.214];
+const mapCenter = [56.1535, 10.214];
 
 Object.keys(visibleCategories)
   .filter((cat) => !(visibleCategories[cat].visible && visibleCategories[cat].enabled))
@@ -123,28 +123,28 @@ class LMap extends React.Component {
         <div className="map">
           <div id="mapdiv">
             <div id="about-iot">
-              { AboutButton }
+              {AboutButton}
             </div>
 
-            {/*<Map center={mapCenter} zoom={9}>*/}
-            {/*  <TileLayer*/}
-            {/*    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'*/}
-            {/*    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
-            {/*  />*/}
-            {/*  <Marker position={mapCenter}>*/}
-            {/*    <Popup>*/}
-            {/*      Bla, bla, bla*/}
-            {/*    </Popup>*/}
-            {/*  </Marker>*/}
-            {/*</Map>*/}
+            <Map center={mapCenter} zoom={9}>
+              <TileLayer
+                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker position={mapCenter}>
+                <Popup>*/
+                  Bla, bla, bla
+                </Popup>
+              </Marker>
+            </Map>
 
             <MapLegend categories={visibleCategories} onCategorieToggle={(key) => toggleElement(this.map, key)} />
 
-            { this.state.selection.type === SELECTION_STATE.DEVICE && (
+            {this.state.selection.type === SELECTION_STATE.DEVICE && (
               <DeviceDetails device={this.state.selection.element} location={this.state.location} onDeviceDetailsClose={this.clearSelection} />
             )}
 
-            { this.state.selection.type === SELECTION_STATE.AREA && (
+            {this.state.selection.type === SELECTION_STATE.AREA && (
               <CameraAreaDetails onDeviceDetailsClose={this.clearSelection} />
             )}
           </div>
@@ -156,7 +156,7 @@ class LMap extends React.Component {
 
 LMap.defaultProps = {
   location: {},
-  onQueryResult: () => {}
+  onQueryResult: () => { }
 };
 
 LMap.propTypes = {
