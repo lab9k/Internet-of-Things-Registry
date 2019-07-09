@@ -9,7 +9,7 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const DEFAULT_LOCALE = 'nl';
+export const DEFAULT_LOCALE = process.env.DEFAULT_LOCALE || 'nl';
 
 export const AUTHENTICATE_USER = 'sia/App/AUTHENTICATE_USER';
 export const AUTHORIZE_USER = 'sia/App/AUTHORIZE_USER';
