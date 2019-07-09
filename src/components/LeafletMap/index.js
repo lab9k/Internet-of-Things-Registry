@@ -7,7 +7,6 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import { getDevices, getDevice, getCameraAreas } from '../../services/api/iot';
 import { showAreas, showMarkers, toggleElement } from '../../services/iotmap';
 import categories from '../../static/categories';
-import amaps from '../../static/amaps.iife';
 import '../../services/map'; // loads L.Proj (Proj binding leaflet)
 
 import MapLegend from '../MapLegend';
@@ -18,7 +17,7 @@ import './style.scss';
 
 const visibleCategories = { ...categories };
 
-const mapCenter = [56.1535, 10.214];
+const mapCenter = [52.378851,4.8979017];
 
 Object.keys(visibleCategories)
   .filter((cat) => !(visibleCategories[cat].visible && visibleCategories[cat].enabled))
@@ -49,38 +48,38 @@ class LMap extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.map) {
-      const options = {
-        layer: 'standaard',
-        target: 'mapdiv',
-        marker: false,
-        search: true,
-        zoom: DEFAULT_ZOOM_LEVEL,
-        onQueryResult: this.props.onQueryResult
-      };
-
-      if (this.props.location.geometrie) {
-        options.marker = true;
-        options.center = {
-          longitude: this.props.location.geometrie.coordinates[1],
-          latitude: this.props.location.geometrie.coordinates[0]
-        };
-      }
-
-      this.map = amaps.createMap(options);
-    }
-    if (!isEqual(this.props.location, this.props.location)) {
-      const input = document.querySelector('#nlmaps-geocoder-control-input');
-      if (input && this.props.location.address) {
-        const address = this.props.location.address;
-        const toevoeging = address.huisnummer_toevoeging ? `-${address.huisnummer_toevoeging}` : '';
-        const display = `${address.openbare_ruimte} ${address.huisnummer}${address.huisletter}${toevoeging}, ${address.postcode} ${address.woonplaats}`;
-        input.setAttribute('value', display);
-      }
-    }
-
-    this.addMarkers();
-    this.addCameraAreas();
+    // if (!this.map) {
+    //   const options = {
+    //     layer: 'standaard',
+    //     target: 'mapdiv',
+    //     marker: false,
+    //     search: true,
+    //     zoom: DEFAULT_ZOOM_LEVEL,
+    //     onQueryResult: this.props.onQueryResult
+    //   };
+    //
+    //   if (this.props.location.geometrie) {
+    //     options.marker = true;
+    //     options.center = {
+    //       longitude: this.props.location.geometrie.coordinates[1],
+    //       latitude: this.props.location.geometrie.coordinates[0]
+    //     };
+    //   }
+    //
+    //   this.map = amaps.createMap(options);
+    // }
+    // if (!isEqual(this.props.location, this.props.location)) {
+    //   const input = document.querySelector('#nlmaps-geocoder-control-input');
+    //   if (input && this.props.location.address) {
+    //     const address = this.props.location.address;
+    //     const toevoeging = address.huisnummer_toevoeging ? `-${address.huisnummer_toevoeging}` : '';
+    //     const display = `${address.openbare_ruimte} ${address.huisnummer}${address.huisletter}${toevoeging}, ${address.postcode} ${address.woonplaats}`;
+    //     input.setAttribute('value', display);
+    //   }
+    // }
+    //
+    // this.addMarkers();
+    // this.addCameraAreas();
   }
 
   async addCameraAreas() {
@@ -126,13 +125,13 @@ class LMap extends React.Component {
               {AboutButton}
             </div>
 
-            <Map center={mapCenter} zoom={9}>
+            <Map center={mapCenter} zoom={14}>
               <TileLayer
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <Marker position={mapCenter}>
-                <Popup>*/
+                <Popup>
                   Bla, bla, bla
                 </Popup>
               </Marker>
