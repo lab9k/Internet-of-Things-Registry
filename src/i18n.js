@@ -9,7 +9,7 @@ import defaultMessages from './translations/en.json';
 import { DEFAULT_LOCALE } from '../src/containers/App/constants';
 
 const translationMessages = {};
-const { LANGUAGES } = process.env;
+const { LANGUAGES = '' } = process.env;
 const appLocales = LANGUAGES.split(',').map((lang) => lang.trim());
 
 appLocales.forEach((lang) => {
