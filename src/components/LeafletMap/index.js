@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import { Map, TileLayer } from 'react-leaflet';
 
 import { getDevices, getDevice, getCameraAreas } from '../../services/api/iot';
-import { showAreas, showMarkers, toggleElement } from '../../services/iotmap';
+import { showAreas, showMarkers } from '../../services/iotmap';
 import categories from '../../static/categories';
 import '../../services/map'; // loads L.Proj (Proj binding leaflet)
 
@@ -44,7 +44,12 @@ class LMap extends React.Component {
         type: SELECTION_STATE.NOTHING,
         element: undefined
       },
-      devices: []
+      devices: [],
+      categories: Object.keys(categories).reduce((prev, curr) => {
+        // eslint-disable-next-line no-param-reassign
+        prev[curr] = true;
+        return prev;
+      }, {})
     };
     this.clearSelection = this.clearSelection.bind(this);
   }
@@ -85,13 +90,27 @@ class LMap extends React.Component {
     this.fetchDevices();
   }
 
-  async fetchDevices() {
-    this.setState({ devices: [...await getDevices()] });
+  get visibleCategories() {
+    return Object.entries(this.state.categories).reduce((prev, [categoryKey, enabled]) => {
+      // eslint-disable-next-line no-param-reassign
+      prev[categoryKey] = { ...categories[categoryKey], enabled };
+      return prev;
+    }, {});
   }
 
-  async addCameraAreas() {
-    const geojson = await getCameraAreas();
-    showAreas(this.map, geojson, this.showCameraArea.bind(this));
+  getVisibleDevices() {
+    return this.state.devices.filter((device) => this.state.categories[device.application]);
+  }
+
+  toggleCategory(key) {
+    const currentCategories = this.state.categories;
+    currentCategories[key] = !currentCategories[key];
+    this.setState({ categories: { ...currentCategories } });
+  }
+
+  showCameraArea(areaDetails) { // eslint-disable-line no-unused-vars
+    const area = {};
+    this.setState({ selection: { type: SELECTION_STATE.AREA, element: area } });
   }
 
   async addMarkers() {
@@ -99,9 +118,13 @@ class LMap extends React.Component {
     showMarkers(this.map, this.devices, this.showDevice.bind(this));
   }
 
-  showCameraArea(areaDetails) { // eslint-disable-line no-unused-vars
-    const area = {};
-    this.setState({ selection: { type: SELECTION_STATE.AREA, element: area } });
+  async addCameraAreas() {
+    const geojson = await getCameraAreas();
+    showAreas(this.map, geojson, this.showCameraArea.bind(this));
+  }
+
+  async fetchDevices() {
+    this.setState({ devices: [...await getDevices()] });
   }
 
   async showDevice(d) {
@@ -137,12 +160,12 @@ class LMap extends React.Component {
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {this.state.devices.map((device) => (
+              {this.getVisibleDevices().map((device) => (
                 <LMarker device={device} key={device.id} />
               ))}
             </Map>
 
-            <MapLegend categories={visibleCategories} onCategorieToggle={(key) => toggleElement(this.map, key)} />
+            <MapLegend categories={this.visibleCategories} onCategorieToggle={(key) => this.toggleCategory(key)} />
 
             {this.state.selection.type === SELECTION_STATE.DEVICE && (
               <DeviceDetails device={this.state.selection.element} location={this.state.location} onDeviceDetailsClose={this.clearSelection} />
