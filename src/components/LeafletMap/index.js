@@ -43,7 +43,8 @@ class LMap extends React.Component {
       selection: {
         type: SELECTION_STATE.NOTHING,
         element: undefined
-      }
+      },
+      devices: []
     };
     this.clearSelection = this.clearSelection.bind(this);
   }
@@ -81,6 +82,11 @@ class LMap extends React.Component {
     //
     // this.addMarkers();
     // this.addCameraAreas();
+    this.fetchDevices();
+  }
+
+  async fetchDevices() {
+    this.setState({ devices: [...await getDevices()] });
   }
 
   async addCameraAreas() {
@@ -118,24 +124,6 @@ class LMap extends React.Component {
       )}
     />);
 
-    const pointIcon = new L.Icon({
-      iconUrl: 'assets/icon-camera@3x.png',
-      name: 'Camera',
-      enabled: true,
-      iconSize: [25, 25],
-      popupAnchor: [0, -10],
-      description: 'Een camera neemt beelden waar en houdt die niet persé vast. Bijvoorbeeld: een fotocamera legt beelden vast; een camera om aantallen vervoersmiddelen te tellen, neemt waar, telt en legt de beelden niet persé vast. De technologie gaat zo snel vooruit dat er inmiddels camera’s zijn voor gezichtsherkenning die in staat zijn op basis van een combinatie van getallen te zoeken naar specifieke gezichten, bijvoorbeeld van een crimineel, zonder andere gezichten te herkennen en vast te leggen.',
-      wikipediaUrl: 'https://en.wikipedia.org/wiki/Camera',
-      wikipediaDescription: 'A camera is an optical instrument for recording or capturing images, which may be stored locally, transmitted to another location, or both. The images may be individual still photographs or sequences of images constituting videos or movies. The camera is a remote sensing device as it senses subjects without any contact . The word camera comes from camera obscura, which means "dark chamber" and is the Latin name of the original device for projecting an image of external reality onto a flat surface. The modern photographic camera evolved from the camera obscura. The functioning of the camera is very similar to the functioning of the human eye. The first permanent photograph was made in 1826 by Joseph Nicéphore Niépce.',
-      subtypes: [
-        'Telcamera',
-        'Kentekenherkenning',
-        'Beeld'
-      ],
-      visible: true,
-      isClustered: true,
-    });
-
     return (
       <div className="map-component">
         <div className="map">
@@ -149,11 +137,20 @@ class LMap extends React.Component {
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker position={mapCenter} icon={pointIcon}>
-                <Popup>
-                  Bla, bla, bla
-                </Popup>
-              </Marker>
+              {this.state.devices.map((device) => {
+                const deviceIcon = new L.Icon({
+                  ...(categories[device.application] || categories.Sensor)
+                });
+                const devicePosition = [device.latitude, device.longitude];
+                return (
+                  <Marker position={devicePosition} icon={deviceIcon} key={device.id}>
+                    <Popup>
+                      {device.application}
+                    </Popup>
+                  </Marker>
+                );
+              })}
+
             </Map>
 
             <MapLegend categories={visibleCategories} onCategorieToggle={(key) => toggleElement(this.map, key)} />
