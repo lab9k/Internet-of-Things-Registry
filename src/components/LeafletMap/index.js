@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 // TODO: import PropTypes from 'prop-types'; unused
 import { Route } from 'react-router-dom';
@@ -37,7 +38,6 @@ const SELECTION_STATE = {
 class LMap extends React.Component {
   constructor(props) {
     super(props);
-
     this.map = null;
     this.state = {
       selection: {
@@ -51,6 +51,7 @@ class LMap extends React.Component {
         return prev;
       }, {})
     };
+    this._isMounted = false;
     this.clearSelection = this.clearSelection.bind(this);
   }
 
@@ -87,7 +88,12 @@ class LMap extends React.Component {
     //
     // this.addMarkers();
     // this.addCameraAreas();
+    this._isMounted = true;
     this.fetchDevices();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   get visibleCategories() {
@@ -124,7 +130,10 @@ class LMap extends React.Component {
   }
 
   async fetchDevices() {
-    this.setState({ devices: [...await getDevices()] });
+    const devices = await getDevices();
+    if (this._isMounted) {
+      this.setState({ devices: [...devices] });
+    }
   }
 
   async showDevice(d) {
