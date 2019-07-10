@@ -10,7 +10,6 @@ const categories = {
     visible: true,
   },
   Camera: {
-    isClustered: true,
     iconUrl: `${ICON_PATH}icon-camera@3x.png`,
     name: 'Camera',
     enabled: true,
@@ -23,6 +22,9 @@ const categories = {
       'Beeld'
     ],
     visible: true,
+    isClustered: true,
+    iconSize: [25, 25],
+    popupAnchor: [0, -10],
   },
   Sensor: {
     isClustered: true,
@@ -38,6 +40,8 @@ const categories = {
       'Geluid'
     ],
     visible: true,
+    iconSize: [25, 25],
+    popupAnchor: [0, -10],
   },
   Baken: {
     isClustered: true,
@@ -49,6 +53,8 @@ const categories = {
     wikipediaDescription: 'A beacon is an intentionally conspicuous device designed to attract attention to a specific location.',
     subtypes: [],
     visible: true,
+    iconSize: [25, 25],
+    popupAnchor: [0, -10],
   },
   'Slimme verkeersinformatie': {
     isClustered: true,
@@ -63,6 +69,8 @@ const categories = {
       'DRIPs: één van de mogelijkheden om van borden informatie te geven aan verkeersdeelnemers. De informatie op de borden kan aangestuurd worden vanuit een centraal punt en op basis van sensoren en/of bakens. Als dat laatste gebeurt, wordt de DRIP opgenomen in het register.'
     ],
     visible: true,
+    iconSize: [25, 25],
+    popupAnchor: [0, -10],
   },
   'Slimme laadpaal': {
     isClustered: true,
@@ -74,6 +82,8 @@ const categories = {
     wikipediaDescription: '',
     subtypes: [],
     visible: false,
+    iconSize: [25, 25],
+    popupAnchor: [0, -10],
   },
   'Slimme lantaarnpaal': {
     isClustered: true,
@@ -85,6 +95,8 @@ const categories = {
     wikipediaDescription: '',
     subtypes: [],
     visible: false,
+    iconSize: [25, 25],
+    popupAnchor: [0, -10],
   }
 };
 
