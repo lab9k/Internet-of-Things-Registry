@@ -142,10 +142,21 @@ class LMap extends React.Component {
                   ...(categories[device.application] || categories.Sensor)
                 });
                 const devicePosition = [device.latitude, device.longitude];
+                // TODO: requires translation
                 return (
                   <Marker position={devicePosition} icon={deviceIcon} key={device.id}>
                     <Popup>
-                      {device.application}
+                      <div className="device-popup">
+                        <h3>Apparaat</h3>
+                        <div className="device-popup-information">
+                          <p className="device-popup-information-label">Category</p>
+                          <p className="device-popup-information-text">{device.categories.join(', ')}</p>
+                        </div>
+                        <div className="device-popup-information">
+                          <p className="device-popup-information-label">Types</p>
+                          <p className="device-popup-information-text">{device.types.map((el) => el.name).join(', ') || 'Unknown'}</p>
+                        </div>
+                      </div>
                     </Popup>
                   </Marker>
                 );

@@ -30,7 +30,7 @@
       box-shadow: 2px 2px 0 0 #999;
     }
 
-    input[type="text"] {
+    input[type='text'] {
       height: 32px;
       border: solid 1px #ccc;
       box-shadow: none;
@@ -91,7 +91,7 @@
   cursor: pointer;
   z-index: 1010;
 
-  font-family: "AvenirNextLTW01-Regular";
+  font-family: 'AvenirNextLTW01-Regular';
   font-size: 16px;
   font-weight: normal;
   font-style: normal;
@@ -162,7 +162,7 @@ path.camera-area {
 }
 
 .leaflet-marker-icon.highlight {
-  box-shadow: 0 0 0 3px rgba(0,0,0,0.8);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.8);
   border-radius: 50%;
 }
 
@@ -177,5 +177,41 @@ path.camera-area {
     left: 0;
     width: 100vw;
     z-index: 1010;
+  }
+}
+.leaflet-popup-content {
+  margin: 0;
+  .device-popup {
+    display: flex;
+    flex-direction: column;
+    h3 {
+      display: block;
+      background-color: #666;
+      color: #f6f6f6;
+    }
+    &-information {
+      padding-bottom: 0.5rem;
+      p {
+        margin: 0;
+        line-height: 1.4;
+      }
+      &-label {
+        padding: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16px;
+        color: #999;
+        border: none;
+        box-shadow: none;
+      }
+      &-text {
+        padding: 4px 0 0;
+        font-size: 16px;
+        line-height: 1;
+        color: #333;
+        border: none;
+        box-shadow: none;
+      }
+    }
   }
 }
