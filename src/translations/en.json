@@ -1,7 +1,4 @@
 {
-  "IoTRegister.components.Footer.author.message": "Made with love by {author}.",
-  "IoTRegister.components.Footer.license.message": "This project is licensed under the MIT license.",
-  "IoTRegister.components.Header.features": "Features",
   "IoTRegister.components.Header.home": "Home",
   "IoTRegister.containers.HomePage.start_project.header": "Start your next react project in seconds",
   "IoTRegister.containers.HomePage.start_project.message": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",

@@ -1,8 +1,5 @@
 {
-  "IoTRegister.components.Footer.author.message": "Met liefde gemaakt door {author}.",
-  "IoTRegister.components.Footer.license.message": "Dit project valt onder Mozilla Public License 2.0.",
-  "IoTRegister.components.Header.features": "",
-  "IoTRegister.components.Header.home": "",
+  "IoTRegister.components.Header.home": "Home",
   "IoTRegister.containers.HomePage.start_project.header": "Welkom bij Gemeente Amsterdam",
   "IoTRegister.containers.HomePage.start_project.message": "Ontwikkeld door Datapunt Amsterdam",
   "IoTRegister.containers.LocaleToggle.nl": "Nederlands",

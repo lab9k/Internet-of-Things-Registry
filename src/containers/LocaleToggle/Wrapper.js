@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 8px;
   position: absolute;
-  top: 60px;
-  right: 10px;
+  top: 10px;
+  right: 0px;
+  margin-right: 200px;
   box-shadow: 2px 2px 0 0 #999999;
   background-color: #f6f6f6;
   border: solid 1px #cccccc;
