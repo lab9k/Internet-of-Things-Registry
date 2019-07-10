@@ -2,8 +2,7 @@ import React from 'react';
 // TODO: import PropTypes from 'prop-types'; unused
 import { Route } from 'react-router-dom';
 // TODO: import { isEqual } from 'lodash'; is unused atm
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-import L from 'leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 
 import { getDevices, getDevice, getCameraAreas } from '../../services/api/iot';
 import { showAreas, showMarkers, toggleElement } from '../../services/iotmap';
@@ -13,6 +12,7 @@ import '../../services/map'; // loads L.Proj (Proj binding leaflet)
 import MapLegend from '../MapLegend';
 import DeviceDetails from '../DeviceDetails';
 import CameraAreaDetails from '../CameraAreaDetails';
+import { LMarker } from '../LeafletMarker';
 
 import './style.scss';
 
@@ -137,31 +137,9 @@ class LMap extends React.Component {
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {this.state.devices.map((device) => {
-                const deviceIcon = new L.Icon({
-                  ...(categories[device.application] || categories.Sensor)
-                });
-                const devicePosition = [device.latitude, device.longitude];
-                // TODO: requires translation
-                return (
-                  <Marker position={devicePosition} icon={deviceIcon} key={device.id}>
-                    <Popup>
-                      <div className="device-popup">
-                        <h3>Apparaat</h3>
-                        <div className="device-popup-information">
-                          <p className="device-popup-information-label">Category</p>
-                          <p className="device-popup-information-text">{device.categories.join(', ')}</p>
-                        </div>
-                        <div className="device-popup-information">
-                          <p className="device-popup-information-label">Types</p>
-                          <p className="device-popup-information-text">{device.types.map((el) => el.name).join(', ') || 'Unknown'}</p>
-                        </div>
-                      </div>
-                    </Popup>
-                  </Marker>
-                );
-              })}
-
+              {this.state.devices.map((device) => (
+                <LMarker device={device} key={device.id} />
+              ))}
             </Map>
 
             <MapLegend categories={visibleCategories} onCategorieToggle={(key) => toggleElement(this.map, key)} />
