@@ -155,7 +155,7 @@ class LMap extends React.Component {
               {AboutButton}
             </div>
 
-            <Map center={mapCenter} zoom={14}>
+            <Map center={mapCenter} zoom={parseInt(process.env.MAP_DEFAULT_ZOOM, 10)} maxZoom={parseInt(process.env.MAP_MAX_ZOOM, 10)}>
               <TileLayer
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
