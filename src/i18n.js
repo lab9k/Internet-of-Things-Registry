@@ -12,20 +12,6 @@ const translationMessages = {};
 const { LANGUAGES = '' } = process.env;
 const appLocales = LANGUAGES.split(',').map((lang) => lang.trim());
 
-appLocales.forEach((lang) => {
-  try {
-    /* eslint-disable global-require */
-    const langData = import(/* webpackChunkName: "react-intl-locale-data", webpackMode: "eager" */`react-intl/locale-data/${lang}`);
-    const messages = require(/* webpackChunkName: "translation", webpackMode: "lazy-once" */`./translations/${lang}.json`);
-    /* eslint-enable */
-
-    addLocaleData(langData);
-    translationMessages[lang] = formatTranslationMessages(lang, messages);
-  } catch (e) {
-    // probably a missing translation file
-  }
-});
-
 const formatTranslationMessages = (locale, messages) => {
   const defaultFormattedMessages =
     locale !== DEFAULT_LOCALE
@@ -41,5 +27,21 @@ const formatTranslationMessages = (locale, messages) => {
     return Object.assign(formattedMessages, { [key]: formattedMessage });
   }, {});
 };
+
+appLocales.forEach((lang) => {
+  try {
+    /* eslint-disable global-require */
+    const langData = require(`react-intl/locale-data/${lang}`);
+    addLocaleData(langData);
+
+    const messages = require(`./translations/${lang}.json`);
+    const format = formatTranslationMessages.call(this, lang, messages);
+    translationMessages[lang] = format;
+
+    /* eslint-enable */
+  } catch (e) {
+    // probably a missing translation file
+  }
+});
 
 export { formatTranslationMessages, appLocales, translationMessages };

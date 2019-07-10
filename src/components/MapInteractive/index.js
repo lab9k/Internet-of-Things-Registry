@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import { isEqual } from 'lodash';
+import { injectIntl, intlShape } from 'react-intl';
 
 import { getDevices, getDevice, getCameraAreas } from '../../services/api/iot';
 import { showAreas, showMarkers, toggleElement } from '../../services/iotmap';
@@ -13,12 +14,15 @@ import MapLegend from '../MapLegend';
 import DeviceDetails from '../DeviceDetails';
 import CameraAreaDetails from '../CameraAreaDetails';
 
+import messages from './messages';
 import './style.scss';
 
 const visibleCategories = { ...categories };
 
 Object.keys(visibleCategories)
-  .filter((cat) => !(visibleCategories[cat].visible && visibleCategories[cat].enabled))
+  .filter(
+    (cat) => !(visibleCategories[cat].visible && visibleCategories[cat].enabled)
+  )
   .forEach((cat) => {
     delete visibleCategories[cat];
   });
@@ -29,6 +33,25 @@ const SELECTION_STATE = {
   NOTHING: 0,
   DEVICE: 1,
   AREA: 2
+};
+
+const AboutButton = ({ children }) => (
+  <Route
+    render={({ history }) => (
+      <button
+        className="about-button"
+        onClick={() => {
+          history.push('/about');
+        }}
+      >
+        {children}
+      </button>
+    )}
+  />
+);
+
+AboutButton.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 class Map extends React.Component {
@@ -70,8 +93,12 @@ class Map extends React.Component {
       const input = document.querySelector('#nlmaps-geocoder-control-input');
       if (input && this.props.location.address) {
         const address = this.props.location.address;
-        const toevoeging = address.huisnummer_toevoeging ? `-${address.huisnummer_toevoeging}` : '';
-        const display = `${address.openbare_ruimte} ${address.huisnummer}${address.huisletter}${toevoeging}, ${address.postcode} ${address.woonplaats}`;
+        const toevoeging = address.huisnummer_toevoeging
+          ? `-${address.huisnummer_toevoeging}`
+          : '';
+        const display = `${address.openbare_ruimte} ${address.huisnummer}${
+          address.huisletter
+        }${toevoeging}, ${address.postcode} ${address.woonplaats}`;
         input.setAttribute('value', display);
       }
     }
@@ -90,7 +117,8 @@ class Map extends React.Component {
     showMarkers(this.map, this.devices, this.showDevice.bind(this));
   }
 
-  showCameraArea(areaDetails) { // eslint-disable-line no-unused-vars
+  showCameraArea() {
+    // eslint-disable-line no-unused-vars
     const area = {};
     this.setState({ selection: { type: SELECTION_STATE.AREA, element: area } });
   }
@@ -98,7 +126,9 @@ class Map extends React.Component {
   async showDevice(d) {
     if (d) {
       const device = await getDevice(d.id);
-      this.setState({ selection: { type: SELECTION_STATE.DEVICE, element: device } });
+      this.setState({
+        selection: { type: SELECTION_STATE.DEVICE, element: device }
+      });
     } else {
       this.setState({ selection: { type: SELECTION_STATE.NOTHING } });
     }
@@ -109,27 +139,30 @@ class Map extends React.Component {
   }
 
   render() {
-    const AboutButton = (<Route
-      render={({ history }) => (
-        <button className="about-button" onClick={() => { history.push('/about'); }}>Over dit register</button>
-      )}
-    />);
-
     return (
       <div className="map-component">
         <div className="map">
           <div id="mapdiv">
             <div id="about-iot">
-              { AboutButton }
+              <AboutButton>
+                {this.props.intl.formatMessage(messages.about)}
+              </AboutButton>
             </div>
 
-            <MapLegend categories={visibleCategories} onCategorieToggle={(key) => toggleElement(this.map, key)} />
+            <MapLegend
+              categories={visibleCategories}
+              onCategorieToggle={(key) => toggleElement(this.map, key)}
+            />
 
-            { this.state.selection.type === SELECTION_STATE.DEVICE && (
-              <DeviceDetails device={this.state.selection.element} location={this.state.location} onDeviceDetailsClose={this.clearSelection} />
+            {this.state.selection.type === SELECTION_STATE.DEVICE && (
+              <DeviceDetails
+                device={this.state.selection.element}
+                location={this.state.location}
+                onDeviceDetailsClose={this.clearSelection}
+              />
             )}
 
-            { this.state.selection.type === SELECTION_STATE.AREA && (
+            {this.state.selection.type === SELECTION_STATE.AREA && (
               <CameraAreaDetails onDeviceDetailsClose={this.clearSelection} />
             )}
           </div>
@@ -145,8 +178,9 @@ Map.defaultProps = {
 };
 
 Map.propTypes = {
+  intl: intlShape.isRequired,
   location: PropTypes.object,
   onQueryResult: PropTypes.func
 };
 
-export default Map;
+export default injectIntl(Map);
