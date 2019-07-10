@@ -5,8 +5,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const dotenv = require('dotenv');
-const envVars = dotenv.config().parsed || {};
+const getEnvVariables = require('./getEnvVariables');
 
 // Remove this line once the following warning goes away (it was meant for webpack loader authors not users):
 // 'DeprecationWarning: loaderUtils.parseQuery() received a non-string value which can be problematic,
@@ -94,7 +93,7 @@ module.exports = (options) => ({
     // inside your code for any environment checks; UglifyJS will automatically
     // drop any unreachable code.
     new webpack.DefinePlugin({
-      'process.env': getEnvVariables()
+      'process.env': getEnvVariables(),
     }),
     new webpack.NamedModulesPlugin(),
     new ExtractTextPlugin({
@@ -119,13 +118,3 @@ module.exports = (options) => ({
   target: options.target || 'web', // Make web variables accessible to webpack, e.g. window
   performance: options.performance || {},
 });
-
-const getEnvVariables = () => {
-  const citySpecificEnvs = Object.entries(envVars).reduce((p, [key, value]) => {
-    // eslint-disable-next-line no-param-reassign
-    p[key] = JSON.stringify(value);
-    return p;
-  }, {});
-  const envs = { NODE_ENV: JSON.stringify(process.env.NODE_ENV), ...citySpecificEnvs, };
-  return envs;
-};
