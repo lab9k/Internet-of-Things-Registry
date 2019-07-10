@@ -212,10 +212,10 @@ describe('The auth service', () => {
 
       login();
 
-      expect(global.location.assign).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/' +
+      expect(global.location.assign).toHaveBeenCalledWith(expect.stringContaining(
         'oauth2/authorize?idp_id=datapunt&response_type=token&client_id=sia' +
         '&scope=SIG%2FALL' +
-        '&state=123StateToken&redirect_uri=https%3A%2F%2Fdata.amsterdam.nl%2Fmanage%2Fincidents');
+        '&state=123StateToken&redirect_uri=https%3A%2F%2Fdata.amsterdam.nl%2Fmanage%2Fincidents'));
     });
   });
 

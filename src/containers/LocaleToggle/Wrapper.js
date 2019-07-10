@@ -1,0 +1,40 @@
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  padding: 8px;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  box-shadow: 2px 2px 0 0 #999999;
+  background-color: #f6f6f6;
+  border: solid 1px #cccccc;
+  cursor: pointer;
+  z-index: 1010;
+
+  font-family: 'AvenirNextLTW01-Regular';
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: #000000;
+
+  &:hover,
+  &:focus {
+    background-color: #ccc;
+    border-color: #000 !important;
+    color: #000 !important;
+    fill: #000;
+  }
+
+  @media screen and (max-width: 540px) {
+    position: absolute;
+    left: 10px;
+    top: auto;
+    right: auto;
+    bottom: 60px;
+  }
+`;
+
+export default Wrapper;
