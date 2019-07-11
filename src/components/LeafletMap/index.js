@@ -19,7 +19,7 @@ import './style.scss';
 
 const visibleCategories = { ...categories };
 
-const mapCenter = [52.378851, 4.8979017];
+const mapCenter = [parseFloat(process.env.MAP_CENTER_LATITUDE), parseFloat(process.env.MAP_CENTER_LONGITUDE)];
 
 Object.keys(visibleCategories)
   .filter((cat) => !(visibleCategories[cat].visible && visibleCategories[cat].enabled))
