@@ -5,11 +5,13 @@ import { Route } from 'react-router-dom';
 import { Map, TileLayer } from 'react-leaflet';
 
 import { getDevices, getDevice, getCameraAreas } from '../../services/api/iot';
+
 import { showAreas, showMarkers } from '../../services/iotmap';
 import categories from '../../static/categories';
 import '../../services/map'; // loads L.Proj (Proj binding leaflet)
-
 import MapLegend from '../MapLegend';
+
+import DanishMapSupplyTileLayer from '../DanishMapSupplyTileLayer';
 import DeviceDetails from '../DeviceDetails';
 import CameraAreaDetails from '../CameraAreaDetails';
 import { LMarker } from '../LeafletMarker';
@@ -18,7 +20,8 @@ import './style.scss';
 
 const visibleCategories = { ...categories };
 
-const mapCenter = [52.378851, 4.8979017];
+// const mapCenter = [52.378851, 4.8979017];
+const mapCenter = [56.1535,10.214];
 
 Object.keys(visibleCategories)
   .filter((cat) => !(visibleCategories[cat].visible && visibleCategories[cat].enabled))
@@ -156,13 +159,18 @@ class LMap extends React.Component {
             </div>
 
             <Map center={mapCenter} zoom={parseInt(process.env.MAP_DEFAULT_ZOOM, 10)} maxZoom={parseInt(process.env.MAP_MAX_ZOOM, 10)}>
-              <TileLayer
-                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
+              {/* <TileLayer*/}
+              {/*  attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'*/}
+              {/*  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
+              {/* />*/}
               {this.getVisibleDevices().map((device) => (
                 <LMarker device={device} key={device.id} />
               ))}
+              <DanishMapSupplyTileLayer
+                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                minZoom="0"
+                maxZoom="13"
+              />
             </Map>
 
             <MapLegend categories={this.visibleCategories} onCategorieToggle={(key) => this.toggleCategory(key)} />
