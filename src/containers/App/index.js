@@ -2,6 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { compose } from 'redux';
 
+import LocaleToggle from 'containers/LocaleToggle';
+
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 
@@ -23,6 +25,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
       <div className="container app-container">
         <HeaderContainer />
         <div className="content container-fluid">
+          <LocaleToggle />
           <div className="row">
             <div className="col-12 col-sm-10 offset-sm-1 col-md-8">
               <Switch>
