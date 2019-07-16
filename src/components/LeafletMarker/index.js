@@ -43,8 +43,8 @@ const LMarker = (props) => {
 
 LMarker.propTypes = {
   device: PropTypes.shape({
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
     types: PropTypes.arrayOf({
       name: PropTypes.string
     }),
