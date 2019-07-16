@@ -16,7 +16,6 @@ const LMarker = (props) => {
   const device = props.device;
   const deviceIcon = createIcon(device);
   const devicePosition = [device.latitude, device.longitude];
-  // TODO: requires translation
   const {
     intl: { formatMessage }
   } = props;
@@ -43,7 +42,15 @@ const LMarker = (props) => {
 };
 
 LMarker.propTypes = {
-  device: PropTypes.object,
+  device: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    types: PropTypes.arrayOf({
+      name: PropTypes.string
+    }),
+    categories: PropTypes.arrayOf(PropTypes.string),
+    id: PropTypes.number
+  }),
   intl: intlShape.isRequired,
 };
 

@@ -154,9 +154,4 @@ class LMap extends React.Component {
   }
 }
 
-// LMap.defaultProps = {
-//   location: {},
-//   onQueryResult: () => { }
-// };
-
 export default LMap;
