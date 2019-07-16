@@ -5,5 +5,8 @@
   "IoTRegister.components.MapLegend.legend.hide": "Tegnforklaring, Gem Tegnforklaring",
   "IoTRegister.components.MapLegend.legend.show": "Tegnforklaring, Vis Tegnforklaring",
   "IoTRegister.components.MapLegend.show": "Vis Tegnforklaring",
+  "IoTRegister.components.LeafletMarker.device": "Device",
+  "IoTRegister.components.LeafletMarker.category": "Category",
+  "IoTRegister.components.LeafletMarker.types": "Types",
   "IoTRegister.containers.NotFoundPage.header": "Siden ikke fundet."
 }
