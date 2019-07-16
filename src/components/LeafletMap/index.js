@@ -1,8 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-// TODO: import PropTypes from 'prop-types'; unused
 import { Route } from 'react-router-dom';
-// TODO: import { isEqual } from 'lodash'; is unused atm
 import { Map, TileLayer } from 'react-leaflet';
 
 import { getDevices, getDevice, getCameraAreas } from '../../services/api/iot';
@@ -13,7 +11,7 @@ import '../../services/map'; // loads L.Proj (Proj binding leaflet)
 import MapLegend from '../MapLegend';
 import DeviceDetails from '../DeviceDetails';
 import CameraAreaDetails from '../CameraAreaDetails';
-import { LMarker } from '../LeafletMarker';
+import LMarker from '../LeafletMarker';
 
 import './style.scss';
 
@@ -26,8 +24,6 @@ Object.keys(visibleCategories)
   .forEach((cat) => {
     delete visibleCategories[cat];
   });
-
-// TODO: const DEFAULT_ZOOM_LEVEL = 14; unused atm
 
 const SELECTION_STATE = {
   NOTHING: 0,
@@ -56,38 +52,6 @@ class LMap extends React.Component {
   }
 
   componentDidMount() {
-    // if (!this.map) {
-    //   const options = {
-    //     layer: 'standaard',
-    //     target: 'mapdiv',
-    //     marker: false,
-    //     search: true,
-    //     zoom: DEFAULT_ZOOM_LEVEL,
-    //     onQueryResult: this.props.onQueryResult
-    //   };
-    //
-    //   if (this.props.location.geometrie) {
-    //     options.marker = true;
-    //     options.center = {
-    //       longitude: this.props.location.geometrie.coordinates[1],
-    //       latitude: this.props.location.geometrie.coordinates[0]
-    //     };
-    //   }
-    //
-    //   this.map = amaps.createMap(options);
-    // }
-    // if (!isEqual(this.props.location, this.props.location)) {
-    //   const input = document.querySelector('#nlmaps-geocoder-control-input');
-    //   if (input && this.props.location.address) {
-    //     const address = this.props.location.address;
-    //     const toevoeging = address.huisnummer_toevoeging ? `-${address.huisnummer_toevoeging}` : '';
-    //     const display = `${address.openbare_ruimte} ${address.huisnummer}${address.huisletter}${toevoeging}, ${address.postcode} ${address.woonplaats}`;
-    //     input.setAttribute('value', display);
-    //   }
-    // }
-    //
-    // this.addMarkers();
-    // this.addCameraAreas();
     this._isMounted = true;
     this.fetchDevices();
   }
@@ -190,14 +154,9 @@ class LMap extends React.Component {
   }
 }
 
-LMap.defaultProps = {
-  location: {},
-  onQueryResult: () => { }
-};
-
-LMap.propTypes = {
-  // TODO: location: PropTypes.object,
-  // TODO: onQueryResult: PropTypes.func
-};
+// LMap.defaultProps = {
+//   location: {},
+//   onQueryResult: () => { }
+// };
 
 export default LMap;

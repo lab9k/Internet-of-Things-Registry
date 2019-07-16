@@ -7,7 +7,6 @@ import LocaleToggle from 'containers/LocaleToggle';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 
-import MapInteractive from '../../components/MapInteractive';
 import LeafletMap from '../../components/LeafletMap';
 import ContactForm from '../../pages/ContactForm';
 import Categories from '../../pages/DeviceCategories';
