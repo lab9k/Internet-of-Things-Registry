@@ -45,9 +45,9 @@ LMarker.propTypes = {
   device: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
-    types: PropTypes.arrayOf({
+    types: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string
-    }),
+    })),
     categories: PropTypes.arrayOf(PropTypes.string),
     id: PropTypes.number
   }),
