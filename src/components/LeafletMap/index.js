@@ -130,8 +130,9 @@ class LMap extends React.Component {
 
             <Map center={mapCenter} zoom={parseInt(process.env.MAP_DEFAULT_ZOOM, 10)} maxZoom={parseInt(process.env.MAP_MAX_ZOOM, 10)}>
               <TileLayer
-                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                subdomains="abcd"
               />
               {this.getVisibleDevices().map((device) => (
                 <LMarker device={device} key={device.id} />
