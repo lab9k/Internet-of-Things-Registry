@@ -50,7 +50,7 @@ LMarker.propTypes = {
     })),
     categories: PropTypes.arrayOf(PropTypes.string),
     id: PropTypes.number
-  }),
+  }).isRequired,
   intl: intlShape.isRequired,
 };
 
