@@ -6,11 +6,26 @@ import { injectIntl, intlShape } from 'react-intl';
 import categories from '../../static/categories';
 import './style.scss';
 import messages from './messages';
+import LPopupMetaInfo from '../LeafletPopupMetaInfo';
 
 
 const createIcon = (device) => new L.Icon({
   ...(categories[device.application] || categories.Sensor)
 });
+
+const createMetaInfoFields = (device) => {
+  if (!device.meta) return [];
+
+  return Object.entries(device.meta).map(([metaFieldKey, metaFieldValue]) => (
+    <LPopupMetaInfo
+      key={metaFieldKey}
+      field={{
+        title: metaFieldKey,
+        value: metaFieldValue
+      }}
+    ></LPopupMetaInfo>
+  ));
+};
 
 const LMarker = (props) => {
   const device = props.device;
@@ -35,6 +50,7 @@ const LMarker = (props) => {
             <p className="device-popup-information-label">{typesLabel}</p>
             <p className="device-popup-information-text">{device.types.map((el) => el.name).join(', ') || 'Unknown'}</p>
           </div>
+          {createMetaInfoFields(device)}
         </div>
       </Popup>
     </Marker>
@@ -49,7 +65,8 @@ LMarker.propTypes = {
       name: PropTypes.string.isRequired
     })),
     categories: PropTypes.arrayOf(PropTypes.string),
-    id: PropTypes.number
+    id: PropTypes.number,
+    meta: PropTypes.object
   }).isRequired,
   intl: intlShape.isRequired,
 };

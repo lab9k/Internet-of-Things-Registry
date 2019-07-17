@@ -24,15 +24,24 @@
         "application": "Sensor",
         "types": [
           {
-            "name": "Luchtkwaliteit",
-            "application": "Luchtkwaliteit",
+            "name": "People",
+            "application": "Cats",
+            "description": ""
+          },
+          {
+            "name": "Cats",
+            "application": "Cats",
             "description": ""
           }
         ],
         "categories": ["Sensor"],
-        "longitude": 3.7046588,
-        "latitude": 51.0509617,
-        "organisation": "Jef's house"
+        "longitude": 3.70557,
+        "latitude": 51.0507,
+        "organisation": "Jef's house",
+        "meta": {
+          "data processing": "A cat will sense the presence of people or other cats and will use this information to purr dramatically loud.",
+          "what is this?": "CAAS - Cat as a sensor"
+        }
       },
       {
         "_links": {
