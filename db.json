@@ -66,18 +66,23 @@
         },
         "id": 3,
         "reference": "WSS105",
-        "application": "Sensor",
+        "application": "Camera",
         "types": [
           {
-            "name": "Luchtkwaliteit",
-            "application": "Luchtkwaliteit",
+            "name": "Politie",
+            "application": "Politie",
             "description": ""
           }
         ],
-        "categories": ["Sensor"],
-        "longitude": 4.9064,
-        "latitude": 52.3644,
-        "organisation": "GGD Amsterdam"
+        "categories": ["Camera"],
+        "longitude": 3.7050319,
+        "latitude": 51.0495489,
+        "organisation": "Politie Gent",
+        "meta": {
+          "organisation": "Politie Gent",
+          "data processing": "This is a live camera, no data is saved",
+          "what is this?": "It's a camera!"
+        }
       },
       {
         "_links": {
