@@ -4,7 +4,7 @@ import { readPaginatedData } from '../datareader';
 let devices = null;
 
 export async function getDevices() {
-  return readPaginatedData(`${CONFIGURATION.API_ROOT}iothings/devices/`);
+  return readPaginatedData(`${CONFIGURATION.API_ROOT}`);
 }
 
 export async function getDevice(id) {
