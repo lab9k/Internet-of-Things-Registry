@@ -3,14 +3,10 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { Map, TileLayer } from 'react-leaflet';
 
-import { getDevices, getDevice, getCameraAreas } from '../../services/api/iot';
-import { showAreas, showMarkers } from '../../services/iotmap';
+import { getDevices } from '../../services/api/iot';
 import categories from '../../static/categories';
-import '../../services/map'; // loads L.Proj (Proj binding leaflet)
 
 import MapLegend from '../MapLegend';
-import DeviceDetails from '../DeviceDetails';
-import CameraAreaDetails from '../CameraAreaDetails';
 import LMarker from '../LeafletMarker';
 
 import './style.scss';
@@ -48,7 +44,6 @@ class LMap extends React.Component {
       }, {})
     };
     this._isMounted = false;
-    this.clearSelection = this.clearSelection.bind(this);
   }
 
   componentDidMount() {
@@ -78,39 +73,11 @@ class LMap extends React.Component {
     this.setState({ categories: { ...currentCategories } });
   }
 
-  showCameraArea(areaDetails) { // eslint-disable-line no-unused-vars
-    const area = {};
-    this.setState({ selection: { type: SELECTION_STATE.AREA, element: area } });
-  }
-
-  async addMarkers() {
-    this.devices = await getDevices();
-    showMarkers(this.map, this.devices, this.showDevice.bind(this));
-  }
-
-  async addCameraAreas() {
-    const geojson = await getCameraAreas();
-    showAreas(this.map, geojson, this.showCameraArea.bind(this));
-  }
-
   async fetchDevices() {
     const devices = await getDevices();
     if (this._isMounted) {
       this.setState({ devices: [...devices] });
     }
-  }
-
-  async showDevice(d) {
-    if (d) {
-      const device = await getDevice(d.id);
-      this.setState({ selection: { type: SELECTION_STATE.DEVICE, element: device } });
-    } else {
-      this.setState({ selection: { type: SELECTION_STATE.NOTHING } });
-    }
-  }
-
-  clearSelection() {
-    this.setState({ selection: { type: SELECTION_STATE.NOTHING } });
   }
 
   render() {
@@ -145,14 +112,6 @@ class LMap extends React.Component {
             </Map>
 
             <MapLegend categories={this.visibleCategories} onCategorieToggle={(key) => this.toggleCategory(key)} />
-
-            {this.state.selection.type === SELECTION_STATE.DEVICE && (
-              <DeviceDetails device={this.state.selection.element} location={this.state.location} onDeviceDetailsClose={this.clearSelection} />
-            )}
-
-            {this.state.selection.type === SELECTION_STATE.AREA && (
-              <CameraAreaDetails onDeviceDetailsClose={this.clearSelection} />
-            )}
           </div>
         </div>
       </div>

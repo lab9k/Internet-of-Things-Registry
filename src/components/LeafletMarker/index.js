@@ -64,11 +64,8 @@ LMarker.propTypes = {
     types: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired
     })),
-    categories: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })),
-    id: PropTypes.string,
+    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     meta: PropTypes.object
   }).isRequired,
   intl: intlShape.isRequired,

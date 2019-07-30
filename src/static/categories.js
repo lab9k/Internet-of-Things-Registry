@@ -1,7 +1,13 @@
+import '../../public/images/icon-camera-gebied@3x.png';
+import '../../public/images/icon-camera@3x.png';
+import '../../public/images/icon-beacon@3x.png';
+import '../../public/images/icon-sensor@3x.png';
+import '../../public/images/icon-laadpaal@3x.png';
+import '../../public/images/icon-verkeer@3x.png';
+import '../../public/images/icon-lantaarn@3x.png';
 const ICON_PATH = 'assets/';
 
 export const CAMERA_TOEZICHTSGEBIED = 'Camera-toezichtsgebied';
-
 const categories = {
   [CAMERA_TOEZICHTSGEBIED]: {
     iconUrl: `${ICON_PATH}icon-camera-gebied@3x.png`,
