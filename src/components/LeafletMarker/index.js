@@ -44,7 +44,7 @@ const LMarker = (props) => {
           <h3>{deviceLabel}</h3>
           <div className="device-popup-information">
             <p className="device-popup-information-label">{categoryLabel}</p>
-            <p className="device-popup-information-text">{device.categories.join(', ')}</p>
+            <p className="device-popup-information-text">{device.categories.map((cat) => cat.name).join(', ')}</p>
           </div>
           <div className="device-popup-information">
             <p className="device-popup-information-label">{typesLabel}</p>
@@ -64,8 +64,11 @@ LMarker.propTypes = {
     types: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired
     })),
-    categories: PropTypes.arrayOf(PropTypes.string),
-    id: PropTypes.number,
+    categories: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })),
+    id: PropTypes.string,
     meta: PropTypes.object
   }).isRequired,
   intl: intlShape.isRequired,

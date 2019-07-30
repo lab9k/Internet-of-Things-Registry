@@ -119,7 +119,7 @@ class LMap extends React.Component {
         <button className="about-button" onClick={() => { history.push('/about'); }}>Over dit register</button>
       )}
     />);
-
+    // TODO: http://geoservices.informatievlaanderen.be/raadpleegdiensten/GRB/wms?request=GetCapabilities&service=WMS
     return (
       <div className="map-component">
         <div className="map">
@@ -134,6 +134,11 @@ class LMap extends React.Component {
                 url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                 subdomains="abcd"
               />
+              {/* <WMSTileLayer
+                url="https://geoservices.informatievlaanderen.be/raadpleegdiensten/GRB/wms"
+                attribution="<a href='https://overheid.vlaanderen.be/GRB-GRB-raadpleegdiensten'>GRB raadpleegdiensten</a>"
+                layers={'GRB_BSK,GRB_SNM,GEM_GRENS,TOPONIEM,GRB_WGR,GRB_WVB,GRB_GBG,GRB_KNW,GRB_WLAS,GRB_WTZ,GRB_WBN,GRB_TRN,GRB_SBN,AGROND'}
+              ></WMSTileLayer> */}
               {this.getVisibleDevices().map((device) => (
                 <LMarker device={device} key={device.id} />
               ))}
