@@ -63,22 +63,7 @@ async function get(url, nTries = 5) {
  * @returns {Promise<Array>}
  */
 export async function readPaginatedData(url) {
-  let next = url;
-  let results = [];
-  let page = 1;
-  const pageSize = 1000;
-  const concatParam = url.includes('?') ? '&' : '?';
-  while (next) {
-    try {
-      const requestUrl = `${url}`;
-      const response = await get(requestUrl);
-      results = results.concat(response.data);
-      next = response.data._links.next.href;
-      page += 1;
-    } catch (e) {
-      next = null;
-    }
-  }
+  const { data: { results } } = await get(url);
   return results;
 }
 

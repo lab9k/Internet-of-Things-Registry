@@ -13,7 +13,6 @@
 import { fromJS } from 'immutable';
 
 import {
-  AUTHORIZE_USER,
   SHOW_GLOBAL_ERROR,
   RESET_GLOBAL_ERROR
 } from './constants';
@@ -26,12 +25,6 @@ export const initialState = fromJS({
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    case AUTHORIZE_USER:
-      return state
-        .set('userName', action.payload.userName)
-        .set('userScopes', fromJS(action.payload.userScopes))
-        .set('accessToken', action.payload.accessToken);
-
     case SHOW_GLOBAL_ERROR:
       return state
         .set('error', !!(action.payload))

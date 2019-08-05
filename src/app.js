@@ -27,13 +27,9 @@ import 'file-loader?name=[name].[ext]!./.htaccess'; // eslint-disable-line impor
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-import 'static/nlmaps.css';
-import 'amsterdam-stijl/dist/css/ams-stijl.css';
 
 // Import root app
 import App from './containers/App';
-import { authenticateUser } from './containers/App/actions';
-import { authenticate } from './shared/services/auth/auth';
 
 // Import Language Provider
 import LanguageProvider from './containers/LanguageProvider';
@@ -105,6 +101,3 @@ if (
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }
 
-// Authenticate and start the authorization process
-const credentials = authenticate();
-store.dispatch(authenticateUser(credentials));
