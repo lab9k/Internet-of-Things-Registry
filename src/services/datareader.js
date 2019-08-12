@@ -19,7 +19,9 @@ export const HTTPStatus = {
  * @returns {Promise<any>}
  */
 function sleep(ms) {
-  return new Promise((resolve, reject) => { setTimeout(resolve, ms); });
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
 }
 
 /**
@@ -34,7 +36,7 @@ async function get(url, nTries = 5) {
   do {
     try {
       HTTPStatus.pending++; // Track pending requests
-      result = await axios({ method: 'get', url: url, withCredentials: true });
+      result = await axios({ method: 'get', url: url, withCredentials: false });
     } catch (error) {
       console.error('Retry...', url);
       nTry++;
@@ -63,8 +65,9 @@ async function get(url, nTries = 5) {
  * @returns {Promise<Array>}
  */
 export async function readPaginatedData(url) {
-  const { data: { results } } = await get(url);
-  return results;
+  const res = await get(url);
+  const { data } = res;
+  return data;
 }
 
 /**
@@ -73,7 +76,7 @@ export async function readPaginatedData(url) {
  * @param resolve
  * @returns {Promise<*>}
  */
-export async function readData(url, resolve = d => d.data) {
+export async function readData(url, resolve = (d) => d.data) {
   const response = await get(url);
   return resolve(response);
 }
