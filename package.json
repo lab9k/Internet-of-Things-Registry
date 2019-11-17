@@ -260,6 +260,7 @@
     "react-dom": "^16.8.6",
     "react-intl": "2.3.0",
     "react-leaflet": "^2.4.0",
+    "react-leaflet-wmts": "^0.1.0",
     "react-loadable": "4.0.3",
     "react-reactive-form": "^1.0.26",
     "react-redux": "^5.0.7",
