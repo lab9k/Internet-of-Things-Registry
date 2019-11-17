@@ -106,7 +106,6 @@ class LMap extends React.Component {
         )}
       />
     );
-    // TODO: http://geoservices.informatievlaanderen.be/raadpleegdiensten/GRB/wms?request=GetCapabilities&service=WMS
     return (
       <div className="map-component">
         <div className="map">
@@ -125,7 +124,7 @@ class LMap extends React.Component {
               /> */}
 
               <WMTSTileLayer
-                url="http://geo.gent.be/geoserver/gwc/service/wmts"
+                url={process.env.MAP_ROOT}
                 layer="SG-E-Stadsplan:Stadsplan"
                 tilematrixSet="SG-WEB MERCATOR"
                 format="image/png"

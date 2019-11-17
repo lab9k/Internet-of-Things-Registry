@@ -67,7 +67,7 @@ async function get(url, nTries = 5) {
 export async function readPaginatedData(url) {
   const res = await get(url);
   const { data } = res;
-  return data;
+  return data.devices.results;
 }
 
 /**
@@ -76,7 +76,7 @@ export async function readPaginatedData(url) {
  * @param resolve
  * @returns {Promise<*>}
  */
-export async function readData(url, resolve = (d) => d.data) {
+export async function readData(url, resolve = d => d.data) {
   const response = await get(url);
   return resolve(response);
 }
