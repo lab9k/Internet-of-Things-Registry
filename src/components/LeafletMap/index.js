@@ -3,6 +3,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { Map } from 'react-leaflet';
 import WMTSTileLayer from 'react-leaflet-wmts';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import { getDevices } from '../../services/api/iot';
 import categories from '../../static/categories';
@@ -131,10 +132,11 @@ class LMap extends React.Component {
                 tilematrixSet="SG-WEB MERCATOR"
                 format="image/png"
               />
-
-              {this.getVisibleDevices().map((device) => (
-                <LMarker device={device} key={device.id} />
-              ))}
+              <MarkerClusterGroup>
+                {this.getVisibleDevices().map((device) => (
+                  <LMarker device={device} key={device.id} />
+                ))}
+              </MarkerClusterGroup>
             </Map>
 
             <MapLegend

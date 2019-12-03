@@ -1,3 +1,5 @@
+@import "~react-leaflet-markercluster/dist/styles.min.css";
+
 .map-component {
   position: fixed;
   width: 100%;
@@ -30,7 +32,7 @@
       box-shadow: 2px 2px 0 0 #999;
     }
 
-    input[type='text'] {
+    input[type="text"] {
       height: 32px;
       border: solid 1px #ccc;
       box-shadow: none;
@@ -90,7 +92,7 @@
   cursor: pointer;
   z-index: 1010;
 
-  font-family: 'AvenirNextLTW01-Regular';
+  font-family: "AvenirNextLTW01-Regular";
   font-size: 16px;
   font-weight: normal;
   font-style: normal;
