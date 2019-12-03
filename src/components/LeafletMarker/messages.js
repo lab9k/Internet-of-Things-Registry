@@ -10,7 +10,7 @@ export const scope = 'IoTRegister.components.LeafletMarker';
 export default defineMessages({
   device: {
     id: `${scope}.device`,
-    defaultMessage: 'Device',
+    defaultMessage: 'Device'
   },
   category: {
     id: `${scope}.category`,
@@ -18,6 +18,18 @@ export default defineMessages({
   },
   types: {
     id: `${scope}.types`,
-    defaultMessage: 'Types',
+    defaultMessage: 'Types'
   },
+  organisation: {
+    id: `${scope}.organisation`,
+    defaultMessage: 'Organisation'
+  },
+  reference: {
+    id: `${scope}.reference`,
+    defaultMessage: 'Reference'
+  },
+  application: {
+    id: `${scope}.application`,
+    defaultMessage: 'Application'
+  }
 });

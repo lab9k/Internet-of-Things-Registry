@@ -8,10 +8,10 @@ import './style.scss';
 import messages from './messages';
 import LPopupMetaInfo from '../LeafletPopupMetaInfo';
 
-
-const createIcon = (device) => new L.Icon({
-  ...(categories[device.application] || categories.Sensor)
-});
+const createIcon = (device) =>
+  new L.Icon({
+    ...(categories[device.application] || categories.Sensor)
+  });
 
 const createMetaInfoFields = (device) => {
   if (!device.meta) return [];
@@ -37,18 +37,41 @@ const LMarker = (props) => {
   const deviceLabel = formatMessage(messages.device);
   const categoryLabel = formatMessage(messages.category);
   const typesLabel = formatMessage(messages.types);
+  const orgLabel = formatMessage(messages.organisation);
+  const referenceLbl = formatMessage(messages.reference);
+  const appLabel = formatMessage(messages.application);
   return (
     <Marker position={devicePosition} icon={deviceIcon} key={device.id}>
       <Popup>
         <div className="device-popup">
           <h3>{deviceLabel}</h3>
           <div className="device-popup-information">
+            <p className="device-popup-information-label">{orgLabel}</p>
+            <p className="device-popup-information-text">
+              {device.organization}
+            </p>
+          </div>
+          <div className="device-popup-information">
+            <p className="device-popup-information-label">{appLabel}</p>
+            <p className="device-popup-information-text">
+              {device.application}
+            </p>
+          </div>
+          <div className="device-popup-information">
+            <p className="device-popup-information-label">{referenceLbl}</p>
+            <p className="device-popup-information-text">{device.reference}</p>
+          </div>
+          <div className="device-popup-information">
             <p className="device-popup-information-label">{categoryLabel}</p>
-            <p className="device-popup-information-text">{device.categories.map((cat) => cat.name).join(', ')}</p>
+            <p className="device-popup-information-text">
+              {device.categories.map((cat) => cat.name).join(', ')}
+            </p>
           </div>
           <div className="device-popup-information">
             <p className="device-popup-information-label">{typesLabel}</p>
-            <p className="device-popup-information-text">{device.types.map((el) => el.name).join(', ') || 'Unknown'}</p>
+            <p className="device-popup-information-text">
+              {device.types.map((el) => el.name).join(', ') || 'Unknown'}
+            </p>
           </div>
           {createMetaInfoFields(device)}
         </div>
@@ -61,14 +84,19 @@ LMarker.propTypes = {
   device: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
-    types: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })),
+    types: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired
+      })
+    ),
     categories: PropTypes.arrayOf(PropTypes.string).isRequired,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    meta: PropTypes.object
+    meta: PropTypes.object,
+    organization: PropTypes.string.isRequired,
+    application: PropTypes.string.isRequired,
+    reference: PropTypes.string.isRequired
   }).isRequired,
-  intl: intlShape.isRequired,
+  intl: intlShape.isRequired
 };
 
 export default injectIntl(LMarker);

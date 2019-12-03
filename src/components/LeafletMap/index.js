@@ -73,9 +73,11 @@ class LMap extends React.Component {
   }
 
   getVisibleDevices() {
-    return this.state.devices.filter(
-      (device) => this.state.categories[device.application]
-    );
+    // TODO: filter devices on category or something else ??? disable filtering altogether?
+    // return this.state.devices.filter(
+    //   device => this.state.categories[device.application]
+    // );
+    return this.state.devices;
   }
 
   toggleCategory(key) {
