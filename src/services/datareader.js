@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import axios from 'axios';
+import axios from "axios";
 
 /**
  * Register HTTP status
@@ -36,9 +36,9 @@ async function get(url, nTries = 5) {
   do {
     try {
       HTTPStatus.pending++; // Track pending requests
-      result = await axios({ method: 'get', url: url, withCredentials: false });
+      result = await axios({ method: "get", url: url, withCredentials: false });
     } catch (error) {
-      console.error('Retry...', url);
+      console.error("Retry...", url);
       nTry++;
       await sleep(nTry * 100); // small sleep before retry request
     } finally {
@@ -51,9 +51,9 @@ async function get(url, nTries = 5) {
     return result;
   } else {
     // All retries have failed
-    console.error('Request failed', url);
+    console.error("Request failed", url);
     HTTPStatus.error++;
-    throw new Error('Request failed', url);
+    throw new Error("Request failed", url);
   }
 }
 
@@ -67,7 +67,7 @@ async function get(url, nTries = 5) {
 export async function readPaginatedData(url) {
   const res = await get(url);
   const { data } = res;
-  return data.devices.results;
+  return data;
 }
 
 /**
