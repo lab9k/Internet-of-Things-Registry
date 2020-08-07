@@ -57,20 +57,18 @@ class LMap extends React.Component {
 
   getVisibleDevices() {
     try {
-      return this.state.devices
-        .filter(
+      return this.state.devices.filter(
           (device) => this.visibleCategories
             .filter((cat) => cat.enabled)
-            .map((cat) => cat.name)
-            .includes(device.types[0].name));
+              .map((cat) => cat.name)
+              .includes(device.category));
     } catch (e) {
       return [];
     }
   }
 
   loadCategories() {
-    this.state.categories = [...new Set(this.state.devices
-      .map((x) => x.types[0].name))]
+    this.state.categories = [...new Set(this.state.devices.map((x) => x.category))]
       .map(this.makeCategory);
   }
 

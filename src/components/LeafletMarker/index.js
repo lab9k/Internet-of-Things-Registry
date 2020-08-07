@@ -35,42 +35,22 @@ const LMarker = (props) => {
     intl: { formatMessage }
   } = props;
   const deviceLabel = formatMessage(messages.device);
-  const categoryLabel = formatMessage(messages.category);
-  const typesLabel = formatMessage(messages.types);
-  const orgLabel = formatMessage(messages.organisation);
-  const referenceLbl = formatMessage(messages.reference);
-  const appLabel = formatMessage(messages.application);
+  const deviceCategory = formatMessage(messages.category);
   return (
     <Marker position={devicePosition} icon={deviceIcon} key={device.id}>
       <Popup>
         <div className="device-popup">
           <h3>{deviceLabel}</h3>
           <div className="device-popup-information">
-            <p className="device-popup-information-label">{orgLabel}</p>
+            <p className="device-popup-information-label">{deviceLabel}</p>
             <p className="device-popup-information-text">
-              {device.organisation}
+              {device.title}
             </p>
           </div>
           <div className="device-popup-information">
-            <p className="device-popup-information-label">{appLabel}</p>
+            <p className="device-popup-information-label">{deviceCategory}</p>
             <p className="device-popup-information-text">
-              {device.application}
-            </p>
-          </div>
-          <div className="device-popup-information">
-            <p className="device-popup-information-label">{referenceLbl}</p>
-            <p className="device-popup-information-text">{device.reference}</p>
-          </div>
-          <div className="device-popup-information">
-            <p className="device-popup-information-label">{categoryLabel}</p>
-            <p className="device-popup-information-text">
-              {device.types[0].description}
-            </p>
-          </div>
-          <div className="device-popup-information">
-            <p className="device-popup-information-label">{typesLabel}</p>
-            <p className="device-popup-information-text">
-              {device.types.map((el) => el.name).join(', ') || 'Unknown'}
+              {device.category}
             </p>
           </div>
           {createMetaInfoFields(device)}
@@ -82,20 +62,16 @@ const LMarker = (props) => {
 
 LMarker.propTypes = {
   device: PropTypes.shape({
+    title: PropTypes.string.isRequired,
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
-    types: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired
-      })
-    ),
-    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    meta: PropTypes.object,
-    organisation: PropTypes.string.isRequired,
-    application: PropTypes.string.isRequired,
-    reference: PropTypes.string.isRequired
+    category: PropTypes.string.isRequired,
+    dataowner: PropTypes.string,
+    dataprocessing: PropTypes.string,
+    link: PropTypes.string,
+    type: PropTypes.string,
+    retention: PropTypes.string,
   }).isRequired,
   intl: intlShape.isRequired
 };

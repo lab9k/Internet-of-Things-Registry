@@ -1,4 +1,4 @@
-import CONFIGURATION from 'shared/services/configuration/configuration';
+import CONFIGURATION from '../../shared/services/configuration/configuration';
 import { readPaginatedData } from '../datareader';
 
 let devices = null;

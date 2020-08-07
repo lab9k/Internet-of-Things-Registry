@@ -6,7 +6,7 @@
  */
 import { addLocaleData } from 'react-intl';
 import defaultMessages from './translations/en.json';
-import { DEFAULT_LOCALE } from '../src/containers/App/constants';
+import { DEFAULT_LOCALE } from './containers/App/constants';
 
 const translationMessages = {};
 const { LANGUAGES = '' } = process.env;
@@ -35,8 +35,7 @@ appLocales.forEach((lang) => {
     addLocaleData(langData);
 
     const messages = require(`./translations/${lang}.json`);
-    const format = formatTranslationMessages.call(this, lang, messages);
-    translationMessages[lang] = format;
+    translationMessages[lang] = formatTranslationMessages.call(this, lang, messages);
 
     /* eslint-enable */
   } catch (e) {
