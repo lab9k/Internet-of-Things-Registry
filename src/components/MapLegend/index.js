@@ -25,7 +25,7 @@ class MapLegend extends React.Component {
           <Checkbox
             name="check"
             checked={category.enabled}
-            onChange={() => this.props.onCategorieToggle(id)}
+            onChange={() => this.props.onCategoryToggle(id)}
           />
           <span className="map-legend__icon">
             <img className="map-legend__icon" src={category.iconUrl} alt="" />
@@ -78,9 +78,9 @@ class MapLegend extends React.Component {
 }
 
 MapLegend.propTypes = {
-  categories: PropTypes.object,
+  categories: PropTypes.array,
   intl: intlShape.isRequired,
-  onCategorieToggle: PropTypes.func
+  onCategoryToggle: PropTypes.func
 };
 
 export default injectIntl(MapLegend);

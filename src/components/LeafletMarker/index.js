@@ -23,7 +23,7 @@ const createMetaInfoFields = (device) => {
         title: metaFieldKey,
         value: metaFieldValue
       }}
-    ></LPopupMetaInfo>
+    />
   ));
 };
 
@@ -48,7 +48,7 @@ const LMarker = (props) => {
           <div className="device-popup-information">
             <p className="device-popup-information-label">{orgLabel}</p>
             <p className="device-popup-information-text">
-              {device.organization}
+              {device.organisation}
             </p>
           </div>
           <div className="device-popup-information">
@@ -64,7 +64,7 @@ const LMarker = (props) => {
           <div className="device-popup-information">
             <p className="device-popup-information-label">{categoryLabel}</p>
             <p className="device-popup-information-text">
-              {device.categories.map((cat) => cat.name).join(', ')}
+              {device.types[0].description}
             </p>
           </div>
           <div className="device-popup-information">
@@ -86,13 +86,14 @@ LMarker.propTypes = {
     longitude: PropTypes.number.isRequired,
     types: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired
       })
     ),
     categories: PropTypes.arrayOf(PropTypes.string).isRequired,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     meta: PropTypes.object,
-    organization: PropTypes.string.isRequired,
+    organisation: PropTypes.string.isRequired,
     application: PropTypes.string.isRequired,
     reference: PropTypes.string.isRequired
   }).isRequired,

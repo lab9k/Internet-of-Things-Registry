@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { compose } from 'redux';
 
-import LocaleToggle from 'containers/LocaleToggle';
+import LocaleToggle from '../LocaleToggle';
 
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
@@ -13,15 +13,15 @@ import About from '../../pages/About';
 import FAQ from '../../pages/FAQ';
 import NotFoundPage from '../NotFoundPage';
 import Footer from '../../components/Footer';
-import HeaderContainer from '../../containers/HeaderContainer';
+import Header from '../../components/Header';
 import reducer from './reducer';
 import saga from './saga';
 
-export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class App extends React.PureComponent {
   render() {
     return (
       <div className="container app-container">
-        <HeaderContainer />
+        <Header />
         <div className="content container-fluid">
           <LocaleToggle />
           <div className="row">

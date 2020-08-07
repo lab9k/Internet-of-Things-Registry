@@ -6,27 +6,18 @@ import WMTSTileLayer from 'react-leaflet-wmts';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import { getDevices } from '../../services/api/iot';
-import categories from '../../static/categories';
 
 import MapLegend from '../MapLegend';
 import LMarker from '../LeafletMarker';
 
 import './style.scss';
 
-const visibleCategories = { ...categories };
 
 const mapCenter = [
   parseFloat(process.env.MAP_CENTER_LATITUDE),
   parseFloat(process.env.MAP_CENTER_LONGITUDE)
 ];
 
-Object.keys(visibleCategories)
-  .filter(
-    (cat) => !(visibleCategories[cat].visible && visibleCategories[cat].enabled)
-  )
-  .forEach((cat) => {
-    delete visibleCategories[cat];
-  });
 
 const SELECTION_STATE = {
   NOTHING: 0,
@@ -37,18 +28,13 @@ const SELECTION_STATE = {
 class LMap extends React.Component {
   constructor(props) {
     super(props);
-    this.map = null;
     this.state = {
       selection: {
         type: SELECTION_STATE.NOTHING,
         element: undefined
       },
       devices: [],
-      categories: Object.keys(categories).reduce((prev, curr) => {
-        // eslint-disable-next-line no-param-reassign
-        prev[curr] = true;
-        return prev;
-      }, {})
+      categories: []
     };
     this._isMounted = false;
   }
@@ -63,28 +49,46 @@ class LMap extends React.Component {
   }
 
   get visibleCategories() {
-    return Object.entries(this.state.categories).reduce(
-      (prev, [categoryKey, enabled]) => {
-        // eslint-disable-next-line no-param-reassign
-        prev[categoryKey] = { ...categories[categoryKey], enabled };
-        return prev;
-      },
-      {}
-    );
+    if (!Object.keys(this.state.categories).length) {
+      this.loadCategories();
+    }
+    return this.state.categories;
   }
 
   getVisibleDevices() {
-    // TODO: filter devices on category or something else ??? disable filtering altogether?
-    // return this.state.devices.filter(
-    //   device => this.state.categories[device.application]
-    // );
-    return this.state.devices;
+    try {
+      return this.state.devices
+        .filter(
+          (device) => this.visibleCategories
+            .filter((cat) => cat.enabled)
+            .map((cat) => cat.name)
+            .includes(device.types[0].name));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  loadCategories() {
+    this.state.categories = [...new Set(this.state.devices
+      .map((x) => x.types[0].name))]
+      .map(this.makeCategory);
+  }
+
+  makeCategory(name) {
+    return {
+      isClustered: true,
+      name,
+      enabled: true,
+      visible: true,
+      iconSize: [25, 25],
+      popupAnchor: [0, -10],
+    };
   }
 
   toggleCategory(key) {
     const currentCategories = this.state.categories;
-    currentCategories[key] = !currentCategories[key];
-    this.setState({ categories: { ...currentCategories } });
+    currentCategories[key].enabled = !currentCategories[key].enabled;
+    this.setState({ categories: currentCategories });
   }
 
   async fetchDevices() {
@@ -141,7 +145,7 @@ class LMap extends React.Component {
 
             <MapLegend
               categories={this.visibleCategories}
-              onCategorieToggle={(key) => this.toggleCategory(key)}
+              onCategoryToggle={(key) => this.toggleCategory(key)}
             />
           </div>
         </div>
