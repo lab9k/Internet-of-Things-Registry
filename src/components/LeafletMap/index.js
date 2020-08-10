@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { Map } from 'react-leaflet';
@@ -18,58 +17,36 @@ const mapCenter = [
   parseFloat(process.env.MAP_CENTER_LONGITUDE)
 ];
 
-
-const SELECTION_STATE = {
-  NOTHING: 0,
-  DEVICE: 1,
-  AREA: 2
-};
-
 class LMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selection: {
-        type: SELECTION_STATE.NOTHING,
-        element: undefined
-      },
       devices: [],
       categories: []
     };
-    this._isMounted = false;
   }
 
   componentDidMount() {
-    this._isMounted = true;
-    this.fetchDevices();
+    getDevices()
+      .then((dev) => this.setState({ devices: [...dev] }))
+      .then(() => this.loadCategories());
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
+  get enabledCategories() {
+    return this.state.categories.filter((cat) => cat.enabled);
   }
 
-  get visibleCategories() {
-    if (!Object.keys(this.state.categories).length) {
-      this.loadCategories();
-    }
-    return this.state.categories;
-  }
-
-  getVisibleDevices() {
-    try {
-      return this.state.devices.filter(
-          (device) => this.visibleCategories
-            .filter((cat) => cat.enabled)
+  get visibleDevices() {
+    return this.state.devices.filter(
+          (device) => this.enabledCategories
               .map((cat) => cat.name)
               .includes(device.category));
-    } catch (e) {
-      return [];
-    }
   }
 
   loadCategories() {
-    this.state.categories = [...new Set(this.state.devices.map((x) => x.category))]
+    const cats = [...new Set(this.state.devices.map((x) => x.category))]
       .map(this.makeCategory);
+    this.setState({ categories: cats });
   }
 
   makeCategory(name) {
@@ -87,13 +64,6 @@ class LMap extends React.Component {
     const currentCategories = this.state.categories;
     currentCategories[key].enabled = !currentCategories[key].enabled;
     this.setState({ categories: currentCategories });
-  }
-
-  async fetchDevices() {
-    const devices = await getDevices();
-    if (this._isMounted) {
-      this.setState({ devices: [...devices] });
-    }
   }
 
   render() {
@@ -135,14 +105,14 @@ class LMap extends React.Component {
                 format="image/png"
               />
               <MarkerClusterGroup>
-                {this.getVisibleDevices().map((device) => (
+                {this.visibleDevices.map((device) => (
                   <LMarker device={device} key={device.id} />
                 ))}
               </MarkerClusterGroup>
             </Map>
 
             <MapLegend
-              categories={this.visibleCategories}
+              categories={this.state.categories}
               onCategoryToggle={(key) => this.toggleCategory(key)}
             />
           </div>

@@ -1,38 +1,52 @@
+.card {
+  border: 0;
+  padding: 5px;
+  width: 18rem;
+}
+.card-body {
+  padding: 5px;
+}
+.leaflet-popup{
+
+}
+.leaflet-popup-content-wrapper{
+
+}
 .leaflet-popup-content {
   margin: 0;
   width: unset;
-  .device-popup {
-    display: flex;
-    flex-direction: column;
-    h3 {
-      display: block;
-      background-color: #666;
-      color: #f6f6f6;
-      margin-bottom: 0;
-    }
-    &-information {
-      padding: 0.5rem;
-      p {
-        margin: 0;
-        line-height: 1.4;
-      }
-      &-label {
-        padding: 0;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 16px;
-        color: #999;
-        border: none;
-        box-shadow: none;
-      }
-      &-text {
-        padding: 4px 0 0;
-        font-size: 16px;
-        line-height: 1;
-        color: #333;
-        border: none;
-        box-shadow: none;
-      }
-    }
-  }
+  //.device-popup {
+  //  display: flex;
+  //  flex-direction: column;
+  //  h3 {
+  //    display: block;
+  //    background-color: #666;
+  //    color: #f6f6f6;
+  //    margin-bottom: 0;
+  //  }
+  //  &-information {
+  //    padding: 0.5rem;
+  //    p {
+  //      margin: 0;
+  //      line-height: 1.4;
+  //    }
+  //    &-label {
+  //      padding: 0;
+  //      font-size: 14px;
+  //      font-weight: 400;
+  //      line-height: 16px;
+  //      color: #999;
+  //      border: none;
+  //      box-shadow: none;
+  //    }
+  //    &-text {
+  //      padding: 4px 0 0;
+  //      font-size: 16px;
+  //      line-height: 1;
+  //      color: #333;
+  //      border: none;
+  //      box-shadow: none;
+  //    }
+  //  }
+  //}
 }

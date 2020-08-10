@@ -20,16 +20,16 @@ export default defineMessages({
     id: `${scope}.types`,
     defaultMessage: 'Types'
   },
-  organisation: {
-    id: `${scope}.organisation`,
-    defaultMessage: 'Organisation'
+  data_owner: {
+    id: `${scope}.data_owner`,
+    defaultMessage: 'Data owner'
   },
-  reference: {
-    id: `${scope}.reference`,
-    defaultMessage: 'Reference'
+  data_processing: {
+    id: `${scope}.data_processing`,
+    defaultMessage: 'Data processing'
   },
-  application: {
-    id: `${scope}.application`,
-    defaultMessage: 'Application'
+  retention: {
+    id: `${scope}.retention`,
+    defaultMessage: 'Retention'
   }
 });
