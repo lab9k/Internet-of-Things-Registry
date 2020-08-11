@@ -21,9 +21,20 @@ class Category {
     this.name = name;
     this.enabled = true;
     this.visible = true;
-    this.types = new Set();
+    this.types = [];
     this.iconSize = [25, 25];
     this.popupAnchor = [0, -10];
+  }
+}
+
+class Type {
+  constructor(name) {
+    this.name = name;
+    this.enabled = true;
+  }
+
+  valueOf() {
+    return this.name;
   }
 }
 
@@ -61,8 +72,9 @@ class LMap extends React.Component {
       .forEach((d) => {
         if (!tax[d.category]) {
           tax[d.category] = new Category(d.category);
+        } if (!tax[d.category].types.map((t) => t.name).includes(d.type)) {
+          tax[d.category].types.push(new Type(d.type));
         }
-        tax[d.category].types.add(d.type);
       }
       );
     this.setState({ categories: tax });
@@ -83,6 +95,12 @@ class LMap extends React.Component {
     const currentCategories = this.state.categories;
     currentCategories[key].enabled = !currentCategories[key].enabled;
     this.setState({ categories: currentCategories });
+  }
+
+  toggleType(category, type) {
+    const currentType = category.types.find((t) => t.name === type.name);
+    currentType.enabled = !currentType.enabled;
+    this.setState(this.state.categories);
   }
 
   render() {
@@ -133,6 +151,7 @@ class LMap extends React.Component {
             <MapLegend
               categories={this.state.categories}
               onCategoryToggle={(key) => this.toggleCategory(key)}
+              onTypeToggle={(category, type) => this.toggleType(category, type)}
             />
           </div>
         </div>
