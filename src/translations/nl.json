@@ -11,6 +11,7 @@
   "IoTRegister.components.LeafletMarker.data_processing": "Dataverwerking",
   "IoTRegister.components.LeafletMarker.data_owner": "Data eigenaar",
   "IoTRegister.components.LeafletMarker.retention": "Bewaartermijn",
+  "IoTRegister.components.LeafletMarker.link_text": "MEER OVER DE DATAVERWERKING",
   "IoTRegister.containers.NotFoundPage.header": "Pagina niet gevonden.",
   "IoTRegister.components.MapLegend.title": "Kaartlagen legenda",
   "IoTRegister.components.MapLegend.show": "Kaartlagen tonen",

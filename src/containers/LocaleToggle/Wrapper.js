@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   cursor: pointer;
   z-index: 1010;
 
-  font-family: 'AvenirNextLTW01-Regular';
+  font-family: 'Fira Sans';
   font-size: 16px;
   font-weight: normal;
   font-style: normal;

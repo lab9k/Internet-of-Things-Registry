@@ -19,6 +19,7 @@ class MapLegend extends React.Component {
   }
 
   render() {
+    // eslint-disable-next-line no-lone-blocks
     const checkboxList = Object.entries(this.props.categories).map(
       ([id, category]) => (
         <div key={category.name} className="map-legend__row mb-1">

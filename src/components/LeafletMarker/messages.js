@@ -31,5 +31,9 @@ export default defineMessages({
   retention: {
     id: `${scope}.retention`,
     defaultMessage: 'Retention'
+  },
+  link_text: {
+    id: `${scope}.link_text`,
+    defaultMessage: 'MORE INFORMARTION ABOUT GDPR'
   }
 });

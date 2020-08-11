@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardTitle } from 'reactstrap';
+import { Card } from 'reactstrap';
 import { Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
@@ -21,71 +21,41 @@ const LMarker = (props) => {
   const {
     intl: { formatMessage }
   } = props;
-  const deviceLabel = formatMessage(messages.device);
-  // const categoryLabel = formatMessage(messages.category);
-  // const typeLabel = formatMessage(messages.types);
   const dataProcessingLabel = formatMessage(messages.data_processing);
-  // const dataOwnerLabel = formatMessage(messages.data_owner);
-  // const retentionLabel = formatMessage(messages.retention);
+  const dataOwnerLabel = formatMessage(messages.data_owner);
+  const retentionLabel = formatMessage(messages.retention);
+  const linkLabel = formatMessage(messages.link_text);
   return (
     <Marker position={devicePosition} icon={deviceIcon} key={device.id}>
       <Popup>
         <Card>
-          <CardBody>
-            <CardTitle className="text-left border-bottom"><h3>{deviceLabel}</h3></CardTitle>
-            <div className="container px-0">
-              <div className="col px-0">
-                <div className="row">
-                  <h4 className="col">{device.category}</h4>
-                  <h4 className="col">{device.type}</h4>
+          <div className="card-body">
+            <div className="card-title border-bottom mb-1"><h3><b>{device.title}</b></h3></div>
+            <div className="col px-0">
+              <div className="row pb-0 border-bottom">
+                <div className="col">
+                  <h3><i>{device.category}</i></h3>
                 </div>
-                <h6>{dataProcessingLabel}</h6>
-                <div>
-                  <p>{device.dataprocessing}</p>
+                <div className="col">
+                  <h3><i>{device.type}</i></h3>
                 </div>
               </div>
+              <div className="data-processing border-bottom pb-1 pl-1 pr-1 pt-2 mt-1 rounded">
+                <h6 className="text-muted card-subtitle mb-2">{dataProcessingLabel}</h6>
+                <p className="card-text mt-auto">{device.dataprocessing}</p>
+              </div>
+              <div className="data-processing border-bottom pb-1 pl-1 pr-1 pt-2 mt-1 rounded">
+                <h6 className="text-muted card-subtitle mb-2">{dataOwnerLabel}</h6>
+                <p className="card-text mt-auto" style={{ fontSize: '14px' }}>{device.dataowner}</p>
+              </div>
+              <div className="data-processing border-bottom pb-1 pl-1 pr-1 pt-2 mt-1 mb-1 rounded">
+                <h6 className="text-muted card-subtitle mb-2">{retentionLabel}</h6>
+                <p className="card-text mt-auto" style={{ fontSize: '14px' }}>{device.retention}</p>
+              </div>
+              <a className="card-link mt-2" href={device.link}>{linkLabel}</a>
             </div>
-          </CardBody>
+          </div>
         </Card>
-        {/* <div className="device-popup">*/}
-        {/*  <h3>{deviceLabel}</h3>*/}
-        {/*  <div className="device-popup-information">*/}
-        {/*    <p className="device-popup-information-label">{deviceLabel}</p>*/}
-        {/*    <p className="device-popup-information-text">*/}
-        {/*      {device.title}*/}
-        {/*    </p>*/}
-        {/*  </div>*/}
-        {/*  <div className="device-popup-information">*/}
-        {/*    <p className="device-popup-information-label">{categoryLabel}</p>*/}
-        {/*    <p className="device-popup-information-text">*/}
-        {/*      {device.category}*/}
-        {/*    </p>*/}
-        {/*  </div>*/}
-        {/*  <div className="device-popup-information">*/}
-        {/*    <p className="device-popup-information-label">{typeLabel}</p>*/}
-        {/*    <p className="device-popup-information-text">*/}
-        {/*      {device.type}*/}
-        {/*    </p>*/}
-        {/*  </div>*/}
-        {/*  <div className="device-popup-information">*/}
-        {/*    <p className="device-popup-information-label">{dataProcessingLabel}</p>*/}
-        {/*    <p className="device-popup-information-text">*/}
-        {/*      {device.dataprocessing}*/}
-        {/*    </p>*/}
-        {/*  </div>*/}
-        {/*  <div className="device-popup-information">*/}
-        {/*    <p className="device-popup-information-label">{dataOwnerLabel}</p>*/}
-        {/*    <p className="device-popup-information-text">*/}
-        {/*      {device.dataowner}*/}
-        {/*    </p>*/}
-        {/*  </div>*/}
-        {/*  <div className="device-popup-information">*/}
-        {/*    <p className="device-popup-information-label">{retentionLabel}</p>*/}
-        {/*    <p className="device-popup-information-text">*/}
-        {/*      {device.retention}*/}
-        {/*    </p>*/}
-        {/*  </div>*/}
-        {/* </div>*/}
       </Popup>
     </Marker>
   );

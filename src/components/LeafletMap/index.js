@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { Map } from 'react-leaflet';
 import WMTSTileLayer from 'react-leaflet-wmts';
-import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import { getDevices } from '../../services/api/iot';
 
@@ -16,6 +15,17 @@ const mapCenter = [
   parseFloat(process.env.MAP_CENTER_LATITUDE),
   parseFloat(process.env.MAP_CENTER_LONGITUDE)
 ];
+
+class Category {
+  constructor(name) {
+    this.name = name;
+    this.enabled = true;
+    this.visible = true;
+    this.types = new Set();
+    this.iconSize = [25, 25];
+    this.popupAnchor = [0, -10];
+  }
+}
 
 class LMap extends React.Component {
   constructor(props) {
@@ -33,7 +43,9 @@ class LMap extends React.Component {
   }
 
   get enabledCategories() {
-    return this.state.categories.filter((cat) => cat.enabled);
+    return Object.entries(this.state.categories)
+      .filter(([, value]) => value.enabled)
+      .map(([, value]) => value);
   }
 
   get visibleDevices() {
@@ -44,19 +56,26 @@ class LMap extends React.Component {
   }
 
   loadCategories() {
-    const cats = [...new Set(this.state.devices.map((x) => x.category))]
-      .map(this.makeCategory);
-    this.setState({ categories: cats });
+    const tax = [];
+    this.state.devices
+      .forEach((d) => {
+        if (!tax[d.category]) {
+          tax[d.category] = new Category(d.category);
+        }
+        tax[d.category].types.add(d.type);
+      }
+      );
+    this.setState({ categories: tax });
   }
 
-  makeCategory(name) {
+  makeCategory(t) {
     return {
       isClustered: true,
-      name,
+      category: t,
       enabled: true,
       visible: true,
       iconSize: [25, 25],
-      popupAnchor: [0, -10],
+      popupAnchor: [0, -10]
     };
   }
 
@@ -104,11 +123,11 @@ class LMap extends React.Component {
                 tilematrixSet="SG-WEB MERCATOR"
                 format="image/png"
               />
-              <MarkerClusterGroup>
-                {this.visibleDevices.map((device) => (
-                  <LMarker device={device} key={device.id} />
+              {/* <MarkerClusterGroup>*/}
+              {this.visibleDevices.map((device) => (
+                <LMarker device={device} key={device.id} />
                 ))}
-              </MarkerClusterGroup>
+              {/* </MarkerClusterGroup>*/}
             </Map>
 
             <MapLegend
