@@ -59,11 +59,16 @@ class LMap extends React.Component {
       .map(([, value]) => value);
   }
 
+  get enabledTypes() {
+    return this.enabledCategories.flatMap((t) => t.types).filter((t) => t.enabled);
+  }
+
   get visibleDevices() {
+    const enabledTypes = this.enabledTypes.map((t) => t.name);
     return this.state.devices.filter(
           (device) => this.enabledCategories
               .map((cat) => cat.name)
-              .includes(device.category));
+              .includes(device.category) && enabledTypes.includes(device.type));
   }
 
   loadCategories() {
@@ -94,13 +99,15 @@ class LMap extends React.Component {
   toggleCategory(key) {
     const currentCategories = this.state.categories;
     currentCategories[key].enabled = !currentCategories[key].enabled;
+    // eslint-disable-next-line no-param-reassign
+    currentCategories[key].types.forEach((t) => { t.enabled = currentCategories[key].enabled; });
     this.setState({ categories: currentCategories });
   }
 
   toggleType(category, type) {
     const currentType = category.types.find((t) => t.name === type.name);
     currentType.enabled = !currentType.enabled;
-    this.setState(this.state.categories);
+    this.setState({ categories: this.state.categories });
   }
 
   render() {
