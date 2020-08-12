@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { getLocations } from '../../services/api/Geocoder';
+import { getLocations, getAddress } from '../../services/api/Geocoder';
 import Suggestions from '../Suggestions';
 
 class Geocoder extends React.Component {
@@ -28,15 +28,25 @@ class Geocoder extends React.Component {
       });
   }
 
+  clearData = (q) => {
+    getAddress(q).then(c => console.log(c));
+    this.setState({
+      query: q,
+      results: []
+    });
+  }
+
   render() {
     return (
       <form className="geocoder" autoComplete="off">
         <input
+          className="form-control"
           placeholder="Gent"
+          value={this.state.query}
           ref={(input) => this.search = input}
           onChange={this.handleInputChange}
         />
-        <Suggestions results={this.state.results} />
+        <Suggestions results={this.state.results} clearResults={this.clearData} />
       </form>
     );
   }
