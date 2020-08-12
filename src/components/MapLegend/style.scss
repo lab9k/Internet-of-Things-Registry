@@ -17,7 +17,7 @@ $secondary-gray4: #f6f6f6;
   z-index: 1010;
   background-color: #fff;
   box-shadow: 2px 2px 0 0 $secondary-gray40;
-  font-family: 'Fira Sans';
+  font-family: 'Fira Sans', sans-serif;
 
   @media screen and (max-width: 576px) {
     width: 100%;

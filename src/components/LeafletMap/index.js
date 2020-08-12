@@ -9,6 +9,7 @@ import MapLegend from '../MapLegend';
 import LMarker from '../LeafletMarker';
 
 import './style.scss';
+import Geocoder from '../Geocoder';
 
 
 const mapCenter = [
@@ -130,7 +131,7 @@ class LMap extends React.Component {
         <div className="map">
           <div id="mapdiv">
             <div id="about-iot">{AboutButton}</div>
-
+            <Geocoder />
             <Map
               center={mapCenter}
               zoom={parseInt(process.env.MAP_DEFAULT_ZOOM, 10)}
