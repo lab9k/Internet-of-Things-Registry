@@ -5,11 +5,12 @@ const Suggestions = (props) => {
   console.log('calling suggestions');
   console.log(props.results);
   const options = props.results.map((value) => (
-    <li key={value}>
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    <li onClick={() => console.log(value)} className="list-group-item list-group-item-action" key={value}>
       {value}
     </li>
   ));
-  return <ul>{options}</ul>;
+  return <ul className="list-group">{options}</ul>;
 };
 
 Suggestions.propTypes = {
