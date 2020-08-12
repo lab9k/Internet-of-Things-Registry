@@ -44,8 +44,11 @@ class LMap extends React.Component {
     super(props);
     this.state = {
       devices: [],
-      categories: []
+      categories: [],
+      center: mapCenter,
+      zoom: 14
     };
+    this.setViewPort = this.setViewPort.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +75,13 @@ class LMap extends React.Component {
               .includes(device.category) && enabledTypes.includes(device.type));
   }
 
+  setViewPort(center) {
+    this.setState({
+      center,
+      zoom: 19
+    });
+  }
+
   loadCategories() {
     const tax = [];
     this.state.devices
@@ -88,12 +98,9 @@ class LMap extends React.Component {
 
   makeCategory(t) {
     return {
-      isClustered: true,
       category: t,
       enabled: true,
       visible: true,
-      iconSize: [25, 25],
-      popupAnchor: [0, -10]
     };
   }
 
@@ -131,29 +138,22 @@ class LMap extends React.Component {
         <div className="map">
           <div id="mapdiv">
             <div id="about-iot">{AboutButton}</div>
-            <Geocoder />
+            <Geocoder viewportCallback={this.setViewPort} />
             <Map
-              center={mapCenter}
-              zoom={parseInt(process.env.MAP_DEFAULT_ZOOM, 10)}
+              center={this.state.center}
+              zoom={this.state.zoom}
+              onViewportChanged={this.onViewportChanged}
               maxZoom={parseInt(process.env.MAP_MAX_ZOOM, 10)}
             >
-              {/* <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-                subdomains="abcd"
-              /> */}
-
               <WMTSTileLayer
                 url={process.env.MAP_ROOT}
                 layer="SG-E-Stadsplan:Stadsplan"
                 tilematrixSet="SG-WEB MERCATOR"
                 format="image/png"
               />
-              {/* <MarkerClusterGroup>*/}
               {this.visibleDevices.map((device) => (
                 <LMarker device={device} key={device.id} />
                 ))}
-              {/* </MarkerClusterGroup>*/}
             </Map>
 
             <MapLegend

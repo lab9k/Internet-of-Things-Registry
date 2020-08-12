@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getLocations, getAddress } from '../../services/api/Geocoder';
 import Suggestions from '../Suggestions';
 
@@ -29,7 +30,7 @@ class Geocoder extends React.Component {
   }
 
   clearData = (q) => {
-    getAddress(q).then(c => console.log(c));
+    getAddress(q).then(c => this.props.viewportCallback([c.LocationResult[0].Location.Lat_WGS84, c.LocationResult[0].Location.Lon_WGS84]));
     this.setState({
       query: q,
       results: []
@@ -50,6 +51,10 @@ class Geocoder extends React.Component {
       </form>
     );
   }
+}
+
+Geocoder.propTypes = {
+  viewportCallback: PropTypes.func
 }
 
 export default Geocoder;
