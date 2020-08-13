@@ -10,6 +10,7 @@ import LMarker from '../LeafletMarker';
 
 import './style.scss';
 import Geocoder from '../Geocoder';
+import SMarker from '../SearchMarker';
 
 
 const mapCenter = [
@@ -46,7 +47,8 @@ class LMap extends React.Component {
       devices: [],
       categories: [],
       center: mapCenter,
-      zoom: 14
+      zoom: 14,
+      searchMarker: undefined
     };
     this.setViewPort = this.setViewPort.bind(this);
   }
@@ -78,7 +80,8 @@ class LMap extends React.Component {
   setViewPort(center) {
     this.setState({
       center,
-      zoom: 19
+      zoom: 19,
+      searchMarker: center
     });
   }
 
@@ -119,6 +122,12 @@ class LMap extends React.Component {
   }
 
   render() {
+    let SearchMarker;
+    if (this.state.searchMarker) {
+      SearchMarker = <SMarker location={this.state.searchMarker} />;
+    } else {
+      SearchMarker = null;
+    }
     const AboutButton = (
       <Route
         render={({ history }) => (
@@ -151,6 +160,7 @@ class LMap extends React.Component {
                 tilematrixSet="SG-WEB MERCATOR"
                 format="image/png"
               />
+              {SearchMarker}
               {this.visibleDevices.map((device) => (
                 <LMarker device={device} key={device.id} />
                 ))}

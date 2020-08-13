@@ -5,6 +5,7 @@ import '../../public/images/icon-sensor@3x.png';
 import '../../public/images/icon-laadpaal@3x.png';
 import '../../public/images/icon-verkeer@3x.png';
 import '../../public/images/icon-lantaarn@3x.png';
+import '../../public/images/icon-marker@3x.png';
 const ICON_PATH = 'assets/';
 
 export const CAMERA_TOEZICHTSGEBIED = 'Camera-toezichtsgebied';
@@ -25,6 +26,13 @@ const categories = {
     visible: true,
     iconSize: [25, 25],
     popupAnchor: [0, -10],
+  },
+  SearchMarker: {
+    iconSize: [50, 50],
+    popupAnchor: [0, 0],
+    visible: true,
+    name: 'SearchMarker',
+    iconUrl: `${ICON_PATH}icon-marker@3x.png`
   }
 };
 
