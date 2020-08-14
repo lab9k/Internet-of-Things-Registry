@@ -6,17 +6,17 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import './style.scss';
 import messages from './messages';
-import { getMarker } from '../../static/marker';
+import { getTypeMarker } from '../../static/marker';
 
-const createIcon = (device) =>
+const createIcon = (category, type) =>
   new L.Icon({
-    ...(getMarker(device.category))
+    ...(getTypeMarker(category, type))
   });
 
 
 const LMarker = (props) => {
   const device = props.device;
-  const deviceIcon = createIcon(device);
+  const deviceIcon = createIcon(device.category, device.type);
   const devicePosition = [device.latitude, device.longitude];
   const {
     intl: { formatMessage }
