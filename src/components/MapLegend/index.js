@@ -10,6 +10,7 @@ import MapLayersIcon from '../../images/icon-map-layers.svg';
 
 import messages from './messages';
 import './style.scss';
+import { getMarker, getTypeMarker } from '../../static/marker';
 
 class MapLegend extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class MapLegend extends React.Component {
     this.state = { isLegendVisible: window.innerWidth > 576 };
   }
 
-  getDiv(category, id) {
+  getCategoryDivs(category, id) {
     return (
       <div key={category.name} className="col">
         <div className="row">
@@ -28,15 +29,15 @@ class MapLegend extends React.Component {
             onChange={() => this.props.onCategoryToggle(id)}
           />
           <span className="map-legend__icon">
-            <img className="map-legend__icon" src={category.iconUrl} alt="" />
+            <img className="map-legend__icon" src={getMarker(category.name).iconUrl} alt="" />
           </span>
           <span className="map-legend__row-title">{category.name}</span>
         </div>
-        {this.createTypes(category, id)}
+        {this.getTypeDivs(category, id)}
       </div>);
   }
 
-  createTypes(category) {
+  getTypeDivs(category) {
     const typeDivs = [];
     category.types.forEach((t) => typeDivs.push(
       <div key={t.name} className="ml-3 row p-1">
@@ -45,6 +46,9 @@ class MapLegend extends React.Component {
           checked={t.enabled}
           onChange={() => this.props.onTypeToggle(category, t)}
         />
+        <span className="map-legend__icon">
+          <img className="map-legend__icon" src={getTypeMarker(category.name, t.name).iconUrl} alt="" />
+        </span>
         <span className="map-legend__row-title">{t.name}</span>
       </div>));
     return typeDivs;
@@ -52,7 +56,7 @@ class MapLegend extends React.Component {
 
   render() {
     const checkboxList = Object.entries(this.props.categories).map(
-      ([id, category]) => this.getDiv(category, id)
+      ([id, category]) => this.getCategoryDivs(category, id)
     );
 
     const { isLegendVisible } = this.state;

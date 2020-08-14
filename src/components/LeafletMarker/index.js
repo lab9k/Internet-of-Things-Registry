@@ -4,15 +4,15 @@ import { Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
-import categories from '../../static/categories';
 import './style.scss';
 import messages from './messages';
-
+import { getMarker } from '../../static/marker';
 
 const createIcon = (device) =>
   new L.Icon({
-    ...(categories[device.application] || categories.Sensor)
+    ...(getMarker(device.category))
   });
+
 
 const LMarker = (props) => {
   const device = props.device;
