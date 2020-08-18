@@ -80,7 +80,19 @@
     z-index: 1001;
   }
 }
-
+.geocoder {
+  padding: 8px;
+  position: absolute;
+  top: 10px;
+  left: 38px;
+  z-index: 1010;
+  @media screen and (max-width: 540px) {
+    left: 1px;
+    top: 1px;
+    right: auto;
+    bottom: auto;
+  }
+}
 .about-button {
   padding: 8px;
   position: absolute;
@@ -92,7 +104,7 @@
   cursor: pointer;
   z-index: 1010;
 
-  font-family: "AvenirNextLTW01-Regular";
+  font-family: 'Fira Sans', sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-style: normal;
