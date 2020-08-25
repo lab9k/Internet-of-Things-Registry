@@ -58,7 +58,6 @@ class MapLegend extends React.Component {
     const checkboxList = Object.entries(this.props.categories).map(
       ([id, category]) => this.getCategoryDivs(category, id)
     );
-
     const { isLegendVisible } = this.state;
     const {
       intl: { formatMessage }
@@ -68,7 +67,6 @@ class MapLegend extends React.Component {
         ? formatMessage(messages.hide)
         : formatMessage(messages.show)
     }`;
-
     return (
       <section
         id="map-legend"
