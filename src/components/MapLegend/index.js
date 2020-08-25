@@ -10,7 +10,7 @@ import MapLayersIcon from '../../images/icon-map-layers.svg';
 
 import messages from './messages';
 import './style.scss';
-import { getMarker, getTypeMarker } from '../../static/marker';
+import { getMarker, getTypeMarker } from '../../services/api/marker';
 
 class MapLegend extends React.Component {
   constructor(props) {

@@ -11,34 +11,13 @@ import LMarker from '../LeafletMarker';
 import './style.scss';
 import Geocoder from '../Geocoder';
 import SMarker from '../SearchMarker';
+import { Category, Type } from './Category';
 
 
 const mapCenter = [
   parseFloat(process.env.MAP_CENTER_LATITUDE),
   parseFloat(process.env.MAP_CENTER_LONGITUDE)
 ];
-
-class Category {
-  constructor(name) {
-    this.name = name;
-    this.enabled = true;
-    this.visible = true;
-    this.types = [];
-    this.iconSize = [25, 25];
-    this.popupAnchor = [0, -10];
-  }
-}
-
-class Type {
-  constructor(name) {
-    this.name = name;
-    this.enabled = true;
-  }
-
-  valueOf() {
-    return this.name;
-  }
-}
 
 class LMap extends React.Component {
   constructor(props) {
@@ -165,7 +144,6 @@ class LMap extends React.Component {
                 <LMarker device={device} key={device.id} />
                 ))}
             </Map>
-
             <MapLegend
               categories={this.state.categories}
               onCategoryToggle={(key) => this.toggleCategory(key)}
