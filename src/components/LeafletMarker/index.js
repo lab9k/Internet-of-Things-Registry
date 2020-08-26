@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import './style.scss';
 import messages from './messages';
-import { getTypeMarker } from '../../static/marker';
+import { getTypeMarker } from '../../services/api/marker';
 
 const createIcon = (category, type) =>
   new L.Icon({

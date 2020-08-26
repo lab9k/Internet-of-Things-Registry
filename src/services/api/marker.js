@@ -1,18 +1,15 @@
-function importAll(r) {
-  const images = {};
+export function importAll(r) {
+  const images = [];
   r.keys().forEach((item) => { images[item.replace('./', '')] = r(item); });
   return images;
 }
-
 /*
 * For adding types you must add a .pmg image with the same name as the category or type IN LOWERCASE
 * in the public/images folder. The programme will attempt to load a corresponding type or category.
 * If no type image is found it will fall back to the category type. If no category type is found it will
 * fallback to a letter.
-* TODO: add the fallback letter images.
 * */
-
-export const markers = importAll(require.context('../../public/images', false, /\.(png|jpe?g|svg)$/));
+export const markers = importAll(require.context('../../../public/images', false, /\.(png|jpe?g|svg)$/));
 const ICON_PATH = 'assets/';
 
 function getLetterMarker(category) {

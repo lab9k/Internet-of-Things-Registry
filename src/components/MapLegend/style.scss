@@ -3,8 +3,14 @@ $map-legend-max-width: 295px;
 $secondary-gray40: #999;
 $secondary-gray20: #ccc;
 $secondary-gray4: #f6f6f6;
-
+*, ::after, ::before{
+  box-sizing: unset;
+}
+span {
+  word-wrap: break-word;
+}
 .map-legend {
+  word-wrap: break-word;
   position: absolute;
   left: 10px;
   bottom: 10px;
@@ -73,7 +79,7 @@ $secondary-gray4: #f6f6f6;
   }
 
   &__header-title {
-    margin: 0px 4px;
+    margin: 0 4px;
     flex-grow: 1;
     font-size: 16px;
     line-height: 24px;
@@ -100,9 +106,10 @@ $secondary-gray4: #f6f6f6;
   }
 
   &__row {
+    flex-wrap: unset;
     display: flex;
     align-items: center;
-    padding: 4px 0px;
+    padding: 4px 0;
     font-size: 16px;
   }
 

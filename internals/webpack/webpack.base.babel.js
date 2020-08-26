@@ -86,6 +86,15 @@ module.exports = (options) => ({
             limit: 10000
           }
         }
+      },
+      {
+        test: /\.csv$/,
+        loader: 'csv-loader',
+        options: {
+          dynamicTyping: true,
+          header: true,
+          skipEmptyLines: true
+        }
       }
     ]
   },

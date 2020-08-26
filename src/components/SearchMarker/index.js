@@ -2,7 +2,7 @@ import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
-import { getMarker } from '../../static/marker';
+import { getMarker } from '../../services/api/marker';
 
 
 const createIcon = () => {

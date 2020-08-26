@@ -1,0 +1,36 @@
+id,category,type,latitude,longitude,dataowner,retention,dataprocessing,GroupName,Voetgangersstraat,Direction,AddressFirstLine,HouseNumber,PostCode,LocationName,title
+14,Camera,ANPR,51.053752,3.718900,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Sint-Michielsplein,NVT,W,Sint-Michielsplein,16,9000,Sint-Michielsplein,001-ANPRVYS00010
+15,Camera,ANPR,51.055350,3.718790,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Drabstraat,NVT,S,Drabstraat,20,9000,Drabstraat,005-ANPRVYS00012
+17,Camera,ANPR,51.054798,3.725840,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Botermarkt,NVT,N,Botermarkt,1,9000,Botermarkt,023-ANPRVYS00111
+21,Camera,ANPR,51.054798,3.725890,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Hoogpoort,NVT,NW,Hoogpoort,63,9000,Hoogpoort,022-ANPRVYS00112
+24,Camera,ANPR,51.056702,3.719600,Stad Gent Mobiliteit,2 weken,"Enkel bus, taxi en prioritaire voertuigen toegelaten",Burgstraat,NVT,E,Burgstraat,2,9000,Burgstraat,008-ANPRVYS00451
+25,Camera,ANPR,51.058102,3.726160,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Waaistraat,NVT,SW,Waaistraat,16,9000,Waaistraat,014-ANPRVYS00481
+26,Camera,ANPR,51.056301,3.726130,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Vrijdagmarkt,NVT,NE,Vrijdagmarkt,36,9000,Vrijdagmarkt ventweg,017-ANPRVYS00712
+26,Camera,ANPR,51.056499,3.725880,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Vrijdagmarkt,NVT,NW,Vrijdagmarkt,45,9000,Vrijdagmarkt plein,019-ANPRVYS00711
+27,Camera,ANPR,51.051399,3.728590,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Lieven Bauwensplein,NVT,NW,Lieven Bauwensplein,1,9000,Lieven Bauwensplein,030-ANPRVYS00531
+28,Camera,ANPR,51.052200,3.725180,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Mageleinstraat,N,N,Mageleinstraat,78,9000,Mageleinstraat,033-ANPRVYS00561
+29,Camera,ANPR,51.052200,3.725120,Stad Gent Mobiliteit,2 weken,Toegangscontrole voetgangersstraat tussen 11u en 18u,Mageleinstraat voetgangersstraat,J,N,Mageleinstraat,78,9000,Mageleinstraat voetgangersstraat,033-ANPRVYS00561
+30,Camera,ANPR,51.052399,3.720180,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Predikherenbrug,NVT,E,Jakobijnenstraat,2,9000,Predikherenbrug,042-ANPRVYS00581
+31,Camera,ANPR,51.051102,3.719720,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Recollettenbrug,NVT,E,Gebroeders Vandeveldestraat,2,9000,Recollettenbrug,050-ANPRVYS00611
+32,Camera,ANPR,51.052299,3.725010,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Kalandestraat,N,S,Kalandestraat,15,9000,Kalandestraat,052-ANPRVYS00562
+33,Camera,ANPR,51.052299,3.725010,Stad Gent Mobiliteit,2 weken,Toegangscontrole voetgangersstraat tussen 11u en 18u,Kalandestraat voetgangersstraat,J,S,Kalandestraat,15,9000,Kalandestraat voetgangersstraat,052-ANPRVYS00562
+34,Camera,ANPR,51.046398,3.718980,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Coupure Links,NVT,E,Coupure,53,9000,Coupure Links,308-ANPRVYS00701
+35,Camera,ANPR,51.038300,3.725950,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Overpoortstraat,NVT,N,Overpoortstraat,51,9000,Overpoortstraat kant Heuvelpoort,066-ANPRVYS00681
+35,Camera,ANPR,51.040600,3.725580,Stad Gent Mobiliteit,2 weken,Toegangscontrole autovrij gebied,Overpoortstraat,NVT,S,Overpoortstraat,38,9000,Overpoortstraat kant Voetweg,064-ANPRVYS00671
+36,Camera,ANPR,51.056999,3.728420,Stad Gent Mobiliteit,2 weken,Controle negeren doorgangsverbod,Ottogracht,NVT,N,Beverhoutplein,22,9000,Ottogracht kant rond punt,303-ANPRVYS00501
+36,Camera,ANPR,51.057598,3.728040,Stad Gent Mobiliteit,2 weken,Controle negeren doorgangsverbod,Ottogracht,NVT,S,Beverhoutplein,18,9000,Ottogracht kant Beverhoutplein,302-ANPRVYS00502
+37,Camera,ANPR,51.050201,3.730060,Stad Gent Mobiliteit,2 weken,Controle negeren doorgangsverbod,Hippoliet Lippensplein,NVT,N,Hippoliet Lippensplein,24,9000,Hippoliet Lippensplein kant Kuiperskaai,307A-ANPRVYS00661
+37,Camera,ANPR,51.049999,3.730540,Stad Gent Mobiliteit,2 weken,Controle negeren doorgangsverbod,Hippoliet Lippensplein,NVT,E,Hippoliet Lippensplein,1,9000,Hippoliet Lippensplein kant Vlaanderenstraat,307B-ANPRVYS00662
+38,Camera,ANPR,51.057701,3.707950,Stad Gent Mobiliteit,2 weken,Controle negeren doorgangsverbod,Bargiebrug,NVT,E,Noordstraat,38,9000,Bargiebrug kant Noordstraat,314B-ANPRVYS00621
+38,Camera,ANPR,51.057800,3.707000,Stad Gent Mobiliteit,2 weken,Controle negeren doorgangsverbod,Bargiebrug,NVT,W,Phoenixstraat,1,9000,Bargiebrug kant Phoenixstraat,314A-ANPRVYS00622
+39,Camera,ANPR,51.050598,3.721510,Stad Gent Mobiliteit,2 weken,,Koophandelsplein,NVT,W,Koophandelsplein,34,9000,Koophandelsplein,070-ANPRVYS00601
+40,Camera,ANPR,51.058800,3.721050,Stad Gent Mobiliteit,2 weken,,Geldmunt,NVT,N,Geldmunt,60,9000,Geldmunt,009-ANPRVYS00461
+41,Camera,ANPR,51.055401,3.726440,Stad Gent Mobiliteit,2 weken,,Onderstraat,NVT,NW,Onderstraat,73,9000,Onderstraat,021-ANPRVYS00511
+42,Camera,ANPR,51.051701,3.726700,Stad Gent Mobiliteit,2 weken,,Gouvernementstraat,NVT,N,Gouvernementstraat,18,9000,Gouvernementstraat,031-ANPRVYS00541
+43,Camera,ANPR,51.050499,3.725880,Stad Gent Mobiliteit,2 weken,,Koestraat,N,N,Koestraat,35,,Koestraat,055-ANPRVYS00751
+44,Camera,ANPR,51.050499,3.725880,Stad Gent Mobiliteit,2 weken,Toegangscontrole voetgangersstraat tussen 11u en 18u,Koestraat voetgangersstraat,J,N,Koestraat,35,9000,Koestraat voetgangersstraat,055-ANPRVYS00751
+45,Camera,ANPR,51.046299,3.722110,Stad Gent Mobiliteit,2 weken,,Verlorenkost,NVT,W,Verlorenkost,1,9000,Verlorenkost,312-ANPRVYS00691
+46,Camera,ANPR,51.051998,3.723370,Stad Gent Mobiliteit,2 weken,,Sint-Niklaasstraat,NVT,N,Sint-Niklaasstraat,1,9000,Sint-Niklaasstraat,034-ANPRVYS00571
+47,Camera,ANPR,51.050800,3.726080,Stad Gent Mobiliteit,2 weken,,Kortedagsteeg,NVT,N,Kortedagsteeg,1,9000,Kortedagsteeg,059-ANPRVYS00801
+48,Camera,ANPR,51.050598,3.727470,Stad Gent Mobiliteit,2 weken,,Sint-Jansvest,NVT,N,Sint-Jansvest,31,9000,Sint-Jansvest,060-ANPRVYS00811
+49,Camera,ANPR,51.053699,3.730910,Stad Gent Mobiliteit,2 weken,,Bisdomkaai,NVT,SE,Bisdomkaai,14,9000,Bisdomkaai,028-ANPR.YS00

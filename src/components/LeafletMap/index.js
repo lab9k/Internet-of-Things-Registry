@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { Map } from 'react-leaflet';
 import WMTSTileLayer from 'react-leaflet-wmts';
-
 import { getDevices } from '../../services/api/iot';
 
 import MapLegend from '../MapLegend';
@@ -11,34 +10,8 @@ import LMarker from '../LeafletMarker';
 import './style.scss';
 import Geocoder from '../Geocoder';
 import SMarker from '../SearchMarker';
-
-
-const mapCenter = [
-  parseFloat(process.env.MAP_CENTER_LATITUDE),
-  parseFloat(process.env.MAP_CENTER_LONGITUDE)
-];
-
-class Category {
-  constructor(name) {
-    this.name = name;
-    this.enabled = true;
-    this.visible = true;
-    this.types = [];
-    this.iconSize = [25, 25];
-    this.popupAnchor = [0, -10];
-  }
-}
-
-class Type {
-  constructor(name) {
-    this.name = name;
-    this.enabled = true;
-  }
-
-  valueOf() {
-    return this.name;
-  }
-}
+import { Category, Type } from './Category';
+import LocateControl from '../locationControl';
 
 class LMap extends React.Component {
   constructor(props) {
@@ -46,7 +19,8 @@ class LMap extends React.Component {
     this.state = {
       devices: [],
       categories: [],
-      center: mapCenter,
+      center: [parseFloat(process.env.MAP_CENTER_LATITUDE),
+        parseFloat(process.env.MAP_CENTER_LONGITUDE)],
       zoom: 14,
       searchMarker: undefined
     };
@@ -69,7 +43,7 @@ class LMap extends React.Component {
     return this.enabledCategories.flatMap((t) => t.types).filter((t) => t.enabled);
   }
 
-  get visibleDevices() {
+  get enabledDevices() {
     const enabledTypes = this.enabledTypes.map((t) => t.name);
     return this.state.devices.filter(
           (device) => this.enabledCategories
@@ -106,7 +80,7 @@ class LMap extends React.Component {
       visible: true,
     };
   }
-
+  // reacts to the checkmark being toggled on and off
   toggleCategory(key) {
     const currentCategories = this.state.categories;
     currentCategories[key].enabled = !currentCategories[key].enabled;
@@ -114,7 +88,13 @@ class LMap extends React.Component {
     currentCategories[key].types.forEach((t) => { t.enabled = currentCategories[key].enabled; });
     this.setState({ categories: currentCategories });
   }
-
+  // reacts to the list of types being made visible or not
+  toggleCategoryTypesVisible(key) {
+    const categories = this.state.categories;
+    categories[key].visible = !categories[key].visible;
+    this.setState({ categories });
+  }
+  // reacts to the checkmark being toggled on and off
   toggleType(category, type) {
     const currentType = category.types.find((t) => t.name === type.name);
     currentType.enabled = !currentType.enabled;
@@ -122,6 +102,16 @@ class LMap extends React.Component {
   }
 
   render() {
+    const locateOptions = {
+      position: 'topleft',
+      strings: {
+        title: 'Show me where I am'
+      },
+      initialZoomLevel: 17,
+      showPopup: false,
+      enableHighAccuracy: true,
+      onActivate: () => {} // callback before engine starts retrieving locations
+    };
     let SearchMarker;
     if (this.state.searchMarker) {
       SearchMarker = <SMarker location={this.state.searchMarker} />;
@@ -144,9 +134,9 @@ class LMap extends React.Component {
     );
     return (
       <div className="map-component">
+        <div id="about-iot">{AboutButton}</div>
         <div className="map">
           <div id="mapdiv">
-            <div id="about-iot">{AboutButton}</div>
             <Geocoder viewportCallback={this.setViewPort} />
             <Map
               center={this.state.center}
@@ -154,6 +144,7 @@ class LMap extends React.Component {
               onViewportChanged={this.onViewportChanged}
               maxZoom={parseInt(process.env.MAP_MAX_ZOOM, 10)}
             >
+              <LocateControl options={locateOptions} />
               <WMTSTileLayer
                 url={process.env.MAP_ROOT}
                 layer="SG-E-Stadsplan:Stadsplan"
@@ -161,15 +152,15 @@ class LMap extends React.Component {
                 format="image/png"
               />
               {SearchMarker}
-              {this.visibleDevices.map((device) => (
-                <LMarker device={device} key={device.id} />
+              {this.enabledDevices.map((device) => (
+                <LMarker device={device} key={device.id} style={{ zIndex: 9999, position: 'relative' }} />
                 ))}
             </Map>
-
             <MapLegend
               categories={this.state.categories}
               onCategoryToggle={(key) => this.toggleCategory(key)}
               onTypeToggle={(category, type) => this.toggleType(category, type)}
+              onVisibleToggle={(key) => this.toggleCategoryTypesVisible(key)}
             />
           </div>
         </div>
