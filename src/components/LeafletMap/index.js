@@ -13,19 +13,14 @@ import SMarker from '../SearchMarker';
 import { Category, Type } from './Category';
 import LocateControl from '../locationControl';
 
-
-const mapCenter = [
-  parseFloat(process.env.MAP_CENTER_LATITUDE),
-  parseFloat(process.env.MAP_CENTER_LONGITUDE)
-];
-
 class LMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       devices: [],
       categories: [],
-      center: mapCenter,
+      center: [parseFloat(process.env.MAP_CENTER_LATITUDE),
+        parseFloat(process.env.MAP_CENTER_LONGITUDE)],
       zoom: 14,
       searchMarker: undefined
     };
@@ -48,7 +43,7 @@ class LMap extends React.Component {
     return this.enabledCategories.flatMap((t) => t.types).filter((t) => t.enabled);
   }
 
-  get visibleDevices() {
+  get enabledDevices() {
     const enabledTypes = this.enabledTypes.map((t) => t.name);
     return this.state.devices.filter(
           (device) => this.enabledCategories
@@ -85,7 +80,7 @@ class LMap extends React.Component {
       visible: true,
     };
   }
-
+  // reacts to the checkmark being toggled on and off
   toggleCategory(key) {
     const currentCategories = this.state.categories;
     currentCategories[key].enabled = !currentCategories[key].enabled;
@@ -93,7 +88,13 @@ class LMap extends React.Component {
     currentCategories[key].types.forEach((t) => { t.enabled = currentCategories[key].enabled; });
     this.setState({ categories: currentCategories });
   }
-
+  // reacts to the list of types being made visible or not
+  toggleCategoryTypesVisible(key) {
+    const categories = this.state.categories;
+    categories[key].visible = !categories[key].visible;
+    this.setState({ categories });
+  }
+  // reacts to the checkmark being toggled on and off
   toggleType(category, type) {
     const currentType = category.types.find((t) => t.name === type.name);
     currentType.enabled = !currentType.enabled;
@@ -151,7 +152,7 @@ class LMap extends React.Component {
                 format="image/png"
               />
               {SearchMarker}
-              {this.visibleDevices.map((device) => (
+              {this.enabledDevices.map((device) => (
                 <LMarker device={device} key={device.id} style={{ zIndex: 9999, position: 'relative' }} />
                 ))}
             </Map>
@@ -159,6 +160,7 @@ class LMap extends React.Component {
               categories={this.state.categories}
               onCategoryToggle={(key) => this.toggleCategory(key)}
               onTypeToggle={(category, type) => this.toggleType(category, type)}
+              onVisibleToggle={(key) => this.toggleCategoryTypesVisible(key)}
             />
           </div>
         </div>

@@ -1,0 +1,6 @@
+title,category,type,dataowner,retention,dataprocessing,latitude,longitude,Device code,Street,Number,Postal code,City,Country,Address full
+FMN Gent 01,Camera,Fietstelpaal met display,Stad Gent,2 weken,Groendreef,51.064868,3.70034,T012,Groendreef,119,9000,Ghent,België,"Groendreef 119, 9000 Gent, België"
+FMN Gent 06,Camera,Fietstelpaal met display,Stad Gent,2 weken,Fietsmeetnet Gent: Gandastraat,51.05388,3.738919,T018,Gandastraat,12,9000,Ghent,België,"Gandastraat 12, 9000 Gent, België"
+FMN Gent 07,Camera,Fietstelpaal met display,Stad Gent,2 weken,Zuidparklaan,51.039698,3.736292,T013,Zuidparklaan,,9000,Ghent,België,"Zuidparklaan, 9000 Gent, België"
+FMN Gent 08,Camera,Fietstelpaal zonder display,Stad Gent,2 weken,Fietsmeetnet Gent: Bataviabrug,51.064614,3.734975,F375,Stapelplein,7,9000,Ghent,België,"Stapelplein 7, 9000 Gent, België"
+FMN Gent 14,Camera,Fietstelpaal zonder display,Stad Gent,2 weken,Fietsmeetnet Gent: Dampoort Zuid,51.056987,3.740393,F387,Antwerpenplein,14,9000,Ghent,België,"Antwerpenplein 14, 9000 Gent, België"

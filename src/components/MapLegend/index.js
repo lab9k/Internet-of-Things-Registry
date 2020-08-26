@@ -16,31 +16,39 @@ class MapLegend extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { isLegendVisible: window.innerWidth > 576 };
+    this.state = {
+      isLegendVisible: window.innerWidth > 576
+    };
   }
 
   getCategoryDivs(category, id) {
+    let types = null;
+    if (category.visible) {
+      types = this.getTypeDivs(category);
+    }
     return (
-      <div key={category.name} className="col">
-        <div className="row">
+      <div key={category.name} className="col category_row">
+        <div className="row" style={{ cursor: 'pointer' }}>
           <Checkbox
             name="check"
             checked={category.enabled}
             onChange={() => this.props.onCategoryToggle(id)}
           />
-          <span className="map-legend__icon">
-            <img className="map-legend__icon" src={getMarker(category.name).iconUrl} alt="" />
-          </span>
-          <span className="map-legend__row-title">{category.name}</span>
+          <div style={{ outline: 'none' }} tabIndex={0} role="menuitem" onClick={() => this.props.onVisibleToggle(id)}>
+            <span className="map-legend__icon">
+              <img className="map-legend__icon" src={getMarker(category.name).iconUrl} alt="" />
+            </span>
+            <span className="map-legend__row-title">{category.name}</span>
+          </div>
         </div>
-        {this.getTypeDivs(category, id)}
+        {types}
       </div>);
   }
 
   getTypeDivs(category) {
     const typeDivs = [];
     category.types.forEach((t) => typeDivs.push(
-      <div key={t.name} className="ml-3 row p-1">
+      <div key={t.name} className="ml-3 row p-1 map-legend__row">
         <Checkbox
           name="check"
           checked={t.enabled}
@@ -103,7 +111,8 @@ MapLegend.propTypes = {
   categories: PropTypes.array,
   intl: intlShape.isRequired,
   onCategoryToggle: PropTypes.func,
-  onTypeToggle: PropTypes.func
+  onTypeToggle: PropTypes.func,
+  onVisibleToggle: PropTypes.func
 };
 
 export default injectIntl(MapLegend);
