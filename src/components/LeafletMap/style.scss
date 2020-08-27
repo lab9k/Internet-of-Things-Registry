@@ -28,7 +28,7 @@
   z-index: 1010;
   @media screen and (max-width: 540px) {
     left: 1px;
-    top: 1px;
+    top: 5px;
     right: auto;
     bottom: auto;
   }
@@ -62,6 +62,7 @@
   }
 
   @media screen and (max-width: 540px) {
+    display: none;
     left: 10px;
     top: auto;
     right: auto;
@@ -91,7 +92,7 @@ path.camera-area {
 
 @media screen and (max-width: 540px) {
   .leaflet-control-zoom {
-    display: none;
+
   }
 }
 
@@ -102,14 +103,4 @@ path.camera-area {
 
 .leaflet-control-zoom a:hover::before {
   background-image: none !important;
-}
-
-@media screen and (max-width: 576px) {
-  #about-iot {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 1010;
-  }
 }

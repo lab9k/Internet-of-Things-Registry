@@ -29,11 +29,7 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 540px) {
-    position: absolute;
-    left: 10px;
-    top: auto;
-    right: auto;
-    bottom: 60px;
+    display:none;
   }
 `;
 

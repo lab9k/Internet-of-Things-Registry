@@ -144,7 +144,7 @@ class LMap extends React.Component {
               onViewportChanged={this.onViewportChanged}
               maxZoom={parseInt(process.env.MAP_MAX_ZOOM, 10)}
             >
-              <LocateControl options={locateOptions} />
+              <LocateControl className="about-iot" options={locateOptions} />
               <WMTSTileLayer
                 url={process.env.MAP_ROOT}
                 layer="SG-E-Stadsplan:Stadsplan"
