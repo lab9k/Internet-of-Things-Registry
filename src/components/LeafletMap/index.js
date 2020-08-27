@@ -4,6 +4,7 @@ import { Map } from 'react-leaflet';
 import WMTSTileLayer from 'react-leaflet-wmts';
 import { getDevices } from '../../services/api/iot';
 
+
 import MapLegend from '../MapLegend';
 import LMarker from '../LeafletMarker';
 
@@ -11,7 +12,9 @@ import './style.scss';
 import Geocoder from '../Geocoder';
 import SMarker from '../SearchMarker';
 import { Category, Type } from './Category';
+
 import LocateControl from '../locationControl';
+
 
 class LMap extends React.Component {
   constructor(props) {
@@ -153,8 +156,9 @@ class LMap extends React.Component {
               />
               {SearchMarker}
               {this.enabledDevices.map((device) => (
-                <LMarker device={device} key={device.id} style={{ zIndex: 9999, position: 'relative' }} />
+                <LMarker device={device} key={device.id} />
                 ))}
+
             </Map>
             <MapLegend
               categories={this.state.categories}

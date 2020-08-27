@@ -14,6 +14,7 @@ const createIcon = (category, type) =>
   });
 
 
+// eslint-disable-next-line no-redeclare
 const LMarker = (props) => {
   const device = props.device;
   const deviceIcon = createIcon(device.category, device.type);
