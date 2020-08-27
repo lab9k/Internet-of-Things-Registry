@@ -14,16 +14,14 @@ import saga from './saga';
 export class App extends React.PureComponent {
   render() {
     return (
-      <div className="container-sm">
-        <div className="content container-fluid">
-          <LocaleToggle />
-          {/* <div className="col-12 col-sm-10 offset-sm-1 col-md-8">*/}
-          <Switch>
-            <Route exact path="/" component={LeafletMap} />
-            {/* <Route path="/about" component={About} />*/}
-          </Switch>
-          {/* </div>*/}
-        </div>
+      <div className="container">
+        <LocaleToggle />
+        {/* <div className="col-12 col-sm-10 offset-sm-1 col-md-8">*/}
+        <Switch>
+          <Route exact path="/" component={LeafletMap} />
+          {/* <Route path="/about" component={About} />*/}
+        </Switch>
+        {/* </div>*/}
       </div>
     );
   }
