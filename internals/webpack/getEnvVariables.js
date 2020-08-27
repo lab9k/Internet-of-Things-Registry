@@ -22,7 +22,8 @@ module.exports = () => {
     MAP_DEFAULT_ZOOM: JSON.stringify(process.env.MAP_DEFAULT_ZOOM),
     MAP_CENTER_LATITUDE: JSON.stringify(process.env.MAP_CENTER_LATITUDE),
     MAP_CENTER_LONGITUDE: JSON.stringify(process.env.MAP_CENTER_LONGITUDE),
-
+    MAP_API_ROOT: JSON.stringify(process.env.MAP_API_ROOT),
+    ADDRESS_API_ROOT: JSON.stringify(process.env.ADDRESS_API_ROOT),
     ...citySpecificEnvs
   };
 
