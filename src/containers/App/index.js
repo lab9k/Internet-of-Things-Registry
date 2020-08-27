@@ -9,7 +9,6 @@ import injectReducer from '../../utils/injectReducer';
 
 import LeafletMap from '../../components/LeafletMap';
 import About from '../../pages/About';
-import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import reducer from './reducer';
 import saga from './saga';
@@ -30,7 +29,6 @@ export class App extends React.PureComponent {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
